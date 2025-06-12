@@ -4,10 +4,14 @@ import archiver from "npm:archiver@^5.3.1";
 import * as path from "path";
 import { exit } from "node:process";
 
+export function removeFirstLine(str: string): string {
+  return str.split("\n").slice(1).join("\n");
+}
+
 export function writeFile(
   folder: string,
   filename: string,
-  contents: string,
+  contents: string
 ): void {
   if (!fs.existsSync(folder)) {
     //sh.mkdir(folder);
@@ -19,7 +23,7 @@ export function writeFile(
 export function findFirstMatchingString(
   strings: string[],
   search: string,
-  courseRoot: string,
+  courseRoot: string
 ): string {
   search = search.replace(courseRoot, "");
   for (const str of strings) {
@@ -37,7 +41,7 @@ export function findFirstMatchingString(
 export function findLastMatchingString(
   loTypes: string[],
   path: string,
-  courseRoot: string,
+  courseRoot: string
 ): string {
   path = path.replace(courseRoot, "");
   const segments = path.split("/");
@@ -157,11 +161,11 @@ export function readYamlFile(yamlFilePath: string): any {
   } catch (err: any) {
     console.log(`Tutors encountered an error reading ${yamlFilePath}:`);
     console.log(
-      "--------------------------------------------------------------",
+      "--------------------------------------------------------------"
     );
     console.log(err.mark.buffer);
     console.log(
-      "--------------------------------------------------------------",
+      "--------------------------------------------------------------"
     );
     console.log(err.message);
     console.log("Review this file and try again....");
@@ -178,11 +182,9 @@ export async function compressToZip(files: string[], outputPath: string) {
   archive.pipe(output);
   for (const [index, file] of files.entries()) {
     if (fs.existsSync(file)) {
-      const numberedName = `${
-        index
-          .toString()
-          .padStart(2, "0")
-      }-${path.basename(file)}`;
+      const numberedName = `${index
+        .toString()
+        .padStart(2, "0")}-${path.basename(file)}`;
       archive.file(file, { name: numberedName });
     }
   }

@@ -1,137 +1,117 @@
 import {
   isCompositeLo,
   type Course,
-  type IconType,
   type Lo,
-  type Panels,
   type Composite,
-  type LoType,
-  type Lab,
-  type Units,
-  type Unit,
-  type Side,
+  type Topic,
 } from "./lo-types.ts";
 import {
   allVideoLos,
-  createCompanions,
-  createToc,
-  createWallBar,
-  filterByType,
-  fixRoutePaths,
+  crumbs,
   flattenLos,
-  initCalendar,
+  loadIcon,
+  getPanels,
+  getUnits,
   injectCourseUrl,
-  loadPropertyFlags,
+  removeUnknownLos,
+  filterByType,
 } from "./lo-utils.ts";
+import {
+  createCompanions,
+  createWalls,
+  initCalendar,
+  loadPropertyFlags,
+} from "./course-utils.ts";
+// import { markdownService } from "$lib/services/markdown";
 
 export function decorateCourseTree(
   course: Course,
   courseId: string = "",
   courseUrl = ""
 ) {
+  // define course properties
   course.courseId = courseId;
   course.courseUrl = courseUrl;
   course.route = `/course/${courseId}`;
-  injectCourseUrl(course, courseId, courseUrl);
+
+  // retrieve all Los in course
+  const allLos = flattenLos(course.los);
+  allLos.push(course);
+
+  // inject course path into all routes
+  injectCourseUrl(allLos, courseId, courseUrl);
+
+  removeUnknownLos(course.los);
+  // Construct course tree
   decorateLoTree(course, course);
 
-  course.walls = [];
-  course.wallMap = new Map<string, Lo[]>();
-  ["talk", "note", "lab", "web", "archive", "github"].forEach((type) =>
-    addWall(course, type as LoType)
-  );
-
-  const los = flattenLos(course.los);
-  los.forEach((lo) => fixRoutePaths(lo));
+  // index all Los in course
   course.loIndex = new Map<string, Lo>();
-  los.forEach((lo) => course.loIndex.set(lo.route, lo));
-  const videoLos = allVideoLos(los);
+  allLos.forEach((lo) => course.loIndex.set(lo.route, lo));
+  const videoLos = allVideoLos(allLos);
   videoLos.forEach((lo) => course.loIndex.set(lo.video, lo));
-  createCompanions(course);
-  createWallBar(course);
-  createToc(course);
+  course.topicIndex = new Map<string, Topic>();
+  //course.los.forEach((lo) => course.topicIndex.set(lo.route, lo as Topic));
+  const topicLos = filterByType(allLos, "topic");
+  topicLos.forEach((lo) => course.topicIndex.set(lo.route, lo as Topic));
+
   loadPropertyFlags(course);
+  createCompanions(course);
+  createWalls(course);
+  // createToc(course);
   initCalendar(course);
 }
 
 export function decorateLoTree(course: Course, lo: Lo) {
-  lo.icon = getIcon(lo);
+  // every Lo knows its parent
   lo.parentCourse = course;
+  // recover icon from frontmatter if present
+  lo.icon = loadIcon(lo);
+  // define breadcrump - path to all parent Los
   lo.breadCrumbs = [];
   crumbs(lo, lo.breadCrumbs);
-  // convertLoToHtml(course, lo);
+  if (lo.breadCrumbs?.length > 2) {
+    if (
+      lo.breadCrumbs[1].type === "unit" ||
+      lo.breadCrumbs[1].type === "side"
+    ) {
+      lo.breadCrumbs[1].route = lo.breadCrumbs[1].route.replace(
+        "topic",
+        "course"
+      );
+    }
+  }
+
+  // Convert summary and contentMd to html
+  // markdownService.convertLoToHtml(course, lo);
+
   if (isCompositeLo(lo)) {
+    // if Lo is composite, recursively decorate all child los
     const compositeLo = lo as Composite;
     compositeLo.panels = getPanels(compositeLo.los);
     compositeLo.units = getUnits(compositeLo.los);
+
+    compositeLo.toc = [];
+    compositeLo.toc.push(
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      ...compositeLo?.panels?.panelVideos,
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      ...compositeLo?.panels?.panelTalks,
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      ...compositeLo?.panels?.panelNotes,
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      ...compositeLo?.units?.units,
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      ...compositeLo?.units?.standardLos,
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      ...compositeLo?.units?.sides
+    );
+
     for (const childLo of compositeLo.los) {
       childLo.parentLo = lo;
       if (compositeLo.los) {
         decorateLoTree(course, childLo);
       }
     }
-  }
-}
-
-function getPanels(los: Lo[]): Panels {
-  return {
-    panelVideos: los?.filter((lo) => lo.type === "panelvideo"),
-    panelTalks: los?.filter((lo) => lo.type === "paneltalk"),
-    panelNotes: los?.filter((lo) => lo.type === "panelnote"),
-  };
-}
-
-function getUnits(los: Lo[]): Units {
-  let standardLos = los?.filter(
-    (lo) =>
-      lo.type !== "unit" &&
-      lo.type !== "panelvideo" &&
-      lo.type !== "paneltalk" &&
-      lo.type !== "panelnote" &&
-      lo.type !== "side"
-  );
-  standardLos = sortLos(standardLos);
-  return {
-    units: los?.filter((lo) => lo.type === "unit") as Unit[],
-    sides: los?.filter((lo) => lo.type === "side") as Side[],
-    standardLos: standardLos,
-  };
-}
-
-function sortLos(los: Array<Lo>): Lo[] {
-  const orderedLos = los.filter((lo) => lo.frontMatter?.order);
-  const unOrderedLos = los.filter((lo) => !lo.frontMatter?.order);
-  orderedLos.sort(
-    (a: any, b: any) => a.frontMatter.order - b.frontMatter.order
-  );
-  return orderedLos.concat(unOrderedLos);
-}
-
-function getIcon(lo: Lo): IconType | undefined {
-  if (lo.frontMatter && lo.frontMatter.icon) {
-    return {
-      // @ts-ignore
-      type: lo.frontMatter.icon["type"],
-      // @ts-ignore
-      color: lo.frontMatter.icon["color"],
-    };
-  }
-  return undefined;
-}
-
-function crumbs(lo: Lo | undefined, los: Lo[]) {
-  if (lo) {
-    crumbs(lo.parentLo, los);
-    los.push(lo);
-  }
-}
-
-function addWall(course: Course, type: LoType) {
-  const los = filterByType(course.los, type);
-  if (los.length > 0) {
-    course.walls?.push(filterByType(course.los, type));
-  }
-  if (los.length > 0) {
-    course.wallMap?.set(type, los);
   }
 }
