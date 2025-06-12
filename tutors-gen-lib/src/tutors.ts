@@ -8,6 +8,7 @@ import { generateLlms } from "./generator/llms.ts";
 
 // Re-export all types
 export * from "./models/lo-types.ts";
+export * from "./models/lo-utils.ts";
 
 export const version = "3.4.7";
 
