@@ -6,6 +6,9 @@ import { writeFile } from "./generator/file-utils.ts";
 import { generateNetlifyToml } from "./generator/netlify.ts";
 import { generateLlms } from "./generator/llms.ts";
 
+// Re-export all types
+export * from "./models/lo-types.ts";
+
 export const version = "3.4.7";
 
 export function parseCourse(folder: string): Course {
