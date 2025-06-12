@@ -2,12 +2,7 @@ import path from "node:path";
 import fm from "npm:front-matter@^4.0.2";
 import * as fs from "node:fs";
 import * as yaml from "npm:js-yaml@^4.1.0";
-import {
-  imageTypes,
-  LearningResource,
-  VideoIdentifier,
-  VideoIdentifiers,
-} from "../models/lo-types.ts";
+import { imageTypes, LearningResource, VideoIdentifier, VideoIdentifiers } from "../models/lo-types.ts";
 import {
   getFileType,
   getHeaderFromBody,
@@ -15,6 +10,7 @@ import {
   readWholeFile,
   withoutHeaderFromBody,
 } from "./file-utils.ts";
+import { exit } from "node:process";
 
 export function getFileWithName(lr: LearningResource, file: string) {
   let foundFilePath = "";
@@ -47,7 +43,7 @@ export function getFilesWithType(lr: LearningResource, type: string): string[] {
 
 export function getFilesWithTypes(
   lr: LearningResource,
-  types: string[]
+  types: string[],
 ): string[] {
   const files = lr.files.filter((file) => types.includes(getFileType(file)));
   return files;
@@ -73,10 +69,12 @@ export function getImageFile(lr: LearningResource): string {
 export function getArchive(lr: LearningResource): string {
   let archiveFile = getFileWithType(lr, ["zip"]);
   if (archiveFile) {
-    archiveFile = `https://{{COURSEURL}}${archiveFile.replace(
-      lr.courseRoot,
-      ""
-    )}`;
+    archiveFile = `https://{{COURSEURL}}${
+      archiveFile.replace(
+        lr.courseRoot,
+        "",
+      )
+    }`;
   }
   return archiveFile;
 }
@@ -103,10 +101,12 @@ export function getLabImage(lr: LearningResource): string {
     const imageFiles = getFilesWithTypes(imageLrs[0], imageTypes);
     imageFiles.forEach((filePath) => {
       if (filePath.includes("/img/main")) {
-        foundFilePath = `https://{{COURSEURL}}${filePath.replace(
-          lr.courseRoot,
-          ""
-        )}`;
+        foundFilePath = `https://{{COURSEURL}}${
+          filePath.replace(
+            lr.courseRoot,
+            "",
+          )
+        }`;
       }
     });
   }
@@ -144,17 +144,19 @@ export function getPdfFile(lr: LearningResource): string {
 export function getVideo(lr: LearningResource, id: string): string {
   let videoId = "";
   if (id) {
-    videoId = `/video/{{COURSEURL}}${lr.route.replace(
-      lr.courseRoot,
-      ""
-    )}/${id}`;
+    videoId = `/video/{{COURSEURL}}${
+      lr.route.replace(
+        lr.courseRoot,
+        "",
+      )
+    }/${id}`;
   }
   return videoId;
 }
 
 export function getMarkdown(
   lr: LearningResource,
-  keyFileName: string = ""
+  keyFileName: string = "",
 ): [string, string, string, any] {
   let mdFile = "";
   if (keyFileName) {
@@ -217,15 +219,15 @@ export function readYaml(lr: LearningResource): any {
     } catch (err: any) {
       console.log(`Tutors encountered an error reading properties.yaml:`);
       console.log(
-        "--------------------------------------------------------------"
+        "--------------------------------------------------------------",
       );
       console.log(err.mark.buffer);
       console.log(
-        "--------------------------------------------------------------"
+        "--------------------------------------------------------------",
       );
       console.log(err.message);
       console.log("Review this file and try again....");
-      sh.exit(1);
+      exit(1);
     }
   }
   return yamlData;

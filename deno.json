@@ -1,3 +1,15 @@
 {
-  "workspace": ["./tutors-gen-lib", "./tutors-publish"]
+  "workspace": ["./tutors-gen-lib", "./tutors-publish"],
+  "fmt": {
+    "include": ["./tutors-gen-lib/src/", "./tutors-publish/src/"],
+    "exclude": [],
+    "useTabs": false,
+    "lineWidth": 180,
+    "indentWidth": 2,
+    "singleQuote": false
+  },
+  "tasks": {
+    "fmt": "deno fmt",
+    "fmt:check": "deno fmt --check"
+  }
 }

@@ -79,8 +79,9 @@ export class LiveLab {
       const prevTitle = prevChapter
         ? truncate(this.chaptersTitles.get(prevChapter.shortTitle))
         : "";
-      if (prevTitle)
+      if (prevTitle) {
         number = this.autoNumber ? prevChapter.shortTitle + ": " : "";
+      }
       this.horizontalNavbarHtml = prevChapter
         ? `<a class="btn btn-sm capitalize" href="${this.url}/${encodeURI(
             prevChapter.shortTitle
@@ -89,8 +90,9 @@ export class LiveLab {
 
       number = "";
       const nextChapter = this.lab.los[currentChapterIndex + 1];
-      if (nextChapter)
+      if (nextChapter) {
         number = this.autoNumber ? nextChapter.shortTitle + ": " : "";
+      }
       // @ts-ignore
       const nextTitle = nextChapter
         ? truncate(this.chaptersTitles.get(nextChapter.shortTitle))

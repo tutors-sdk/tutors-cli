@@ -1,10 +1,5 @@
-import { Lo, Course, Composite, Talk, Topic } from "../models/lo-types.ts";
-import {
-  filterByType,
-  flattenLos,
-  removeFirstLine,
-  removeLeadingHashes,
-} from "../models/lo-utils.ts";
+import type { Composite, Course, Lo, Talk, Topic } from "../models/lo-types.ts";
+import { filterByType, flattenLos, removeFirstLine, removeLeadingHashes } from "../models/lo-utils.ts";
 import { compressToZip, writeFile } from "./file-utils.ts";
 
 let header = "";
@@ -19,9 +14,7 @@ export function toSnakeCase(str: string): string {
 function printLo(lo: Lo, level: number) {
   const title = removeLeadingHashes(lo.title);
   const contentMd = removeFirstLine(lo.contentMd);
-  return `${"#".repeat(level)} ${
-    lo.type.charAt(0).toUpperCase() + lo.type.slice(1)
-  } : ${title}\n\n ${contentMd}`;
+  return `${"#".repeat(level)} ${lo.type.charAt(0).toUpperCase() + lo.type.slice(1)} : ${title}\n\n ${contentMd}`;
 }
 
 function generateLo(lo: Lo, llmsTxt: string[], level: number) {
@@ -46,7 +39,7 @@ function generatePdfs(pdfs: Talk[], folder: string) {
   let pdfFiles: string[] = [];
   for (const pdf of pdfs) {
     const relativeRoute = pdf.route.substring(
-      pdf.route.indexOf("{{COURSEURL}}") + "{{COURSEURL}}".length
+      pdf.route.indexOf("{{COURSEURL}}") + "{{COURSEURL}}".length,
     );
     pdfFiles.push(`./${relativeRoute}/${pdf.pdfFile}`);
   }
@@ -59,7 +52,8 @@ export function generateLlmsByTopic(course: Course, folder: string) {
     if (lo.type === "topic" && lo.hide !== true) {
       const topic = lo as Topic;
       let allTxt: string[] = [];
-      header = `<SYSTEM> This is the Tutors course ${course.title} topic ${topic.title} by ${course.properties.credits}</SYSTEM>\n\n`;
+      header =
+        `<SYSTEM> This is the Tutors course ${course.title} topic ${topic.title} by ${course.properties.credits}</SYSTEM>\n\n`;
       allTxt.push(header);
       generateLo(topic, allTxt, 1);
 

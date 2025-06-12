@@ -1,14 +1,4 @@
-import type {
-  Lo,
-  Composite,
-  Talk,
-  LoType,
-  Course,
-  Topic,
-  IconNav,
-  Calendar,
-  WeekType,
-} from "./lo-types.ts";
+import type { Calendar, Composite, Course, IconNav, Lo, LoType, Talk, Topic, WeekType } from "./lo-types.ts";
 
 export function filterByType(list: Lo[], type: LoType): Lo[] {
   const los = flattenLos(list);
@@ -46,7 +36,7 @@ export function createToc(course: Course) {
       ...topic.panels.panelNotes,
       ...topic.units.units,
       ...topic.units.standardLos,
-      ...topic.units.sides
+      ...topic.units.sides,
     );
 
     topic.toc.forEach((lo) => {
@@ -187,12 +177,9 @@ export function fixRoutePaths(lo: Lo) {
 }
 
 export function loadPropertyFlags(course: Course) {
-  course.isPortfolio =
-    (course.properties?.portfolio as unknown as boolean) === true;
-  course.areVideosHidden =
-    (course.properties?.hideVideos as unknown as boolean) === true;
-  course.areLabStepsAutoNumbered =
-    (course.properties?.labStepsAutoNumber as unknown as boolean) === true;
+  course.isPortfolio = (course.properties?.portfolio as unknown as boolean) === true;
+  course.areVideosHidden = (course.properties?.hideVideos as unknown as boolean) === true;
+  course.areLabStepsAutoNumbered = (course.properties?.labStepsAutoNumber as unknown as boolean) === true;
   course.authLevel = course.properties.auth as unknown as number;
   course.hasEnrollment = false;
   course.hasWhiteList = false;
@@ -220,7 +207,7 @@ export function initCalendar(course: Course) {
       const currentWeek = calendar.weeks.find(
         (week, i) =>
           today > Date.parse(week.date) &&
-          today <= Date.parse(calendar.weeks[i + 1]?.date)
+          today <= Date.parse(calendar.weeks[i + 1]?.date),
       );
       // @ts-ignore
       course.courseCalendar = {

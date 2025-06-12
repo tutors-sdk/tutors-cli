@@ -18,15 +18,15 @@ import {
   removeLeadingHashes,
 } from "./lr-utils.ts";
 import {
+  Archive,
+  Composite,
   Course,
+  isCompositeLo,
+  Lab,
+  LearningResource,
   Lo,
   preOrder,
-  LearningResource,
   Talk,
-  Archive,
-  Lab,
-  isCompositeLo,
-  Composite,
 } from "../models/lo-types.ts";
 import { readWholeFile, readYamlFile } from "./file-utils.ts";
 import fm from "npm:front-matter@^4.0.2";
@@ -71,7 +71,7 @@ function buildLab(lo: Lo, lr: LearningResource): Lo {
     theTitle = removeLeadingHashes(theTitle);
     const shortTitle = chapterName.substring(
       chapterName.indexOf(".") + 1,
-      chapterName.lastIndexOf(".")
+      chapterName.lastIndexOf("."),
     );
     if (lab.title == "") lab.title = shortTitle;
     const labStep = {
@@ -180,7 +180,7 @@ function buildDefaultLo(lr: LearningResource, keyFileName: string = ""): Lo {
 function buildLo(
   lr: LearningResource,
   level: number,
-  keyFileName: string = ""
+  keyFileName: string = "",
 ): Lo {
   let lo = buildDefaultLo(lr, keyFileName);
   console.log(`${"-".repeat(level * 2)}: ${lo.id} : ${lo.title}`);

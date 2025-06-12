@@ -1,18 +1,13 @@
 import * as fs from "node:fs";
 import path from "node:path";
-import {
-  copyFileToFolder,
-  findLastMatchingString,
-  getFileName,
-  getFileType,
-} from "./file-utils.ts";
-import { assetTypes, LearningResource, loTypes } from "../models/lo-types.ts";
+import { copyFileToFolder, findLastMatchingString, getFileName, getFileType } from "./file-utils.ts";
+import { assetTypes, type LearningResource, loTypes } from "../models/lo-types.ts";
 
 const loSignatures: string[] = [];
 loTypes.forEach((type) => loSignatures.push(`/${type}`));
 
 export const resourceBuilder = {
-  lr: <LearningResource>{},
+  lr: <LearningResource> {},
   root: "",
 
   getLoType(route: string): string {

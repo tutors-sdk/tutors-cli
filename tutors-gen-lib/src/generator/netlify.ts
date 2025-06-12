@@ -3,7 +3,7 @@ import * as fs from "node:fs";
 export function writeFile(
   folder: string,
   filename: string,
-  contents: string
+  contents: string,
 ): void {
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder);
