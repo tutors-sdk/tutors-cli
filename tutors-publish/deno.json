@@ -1,0 +1,10 @@
+{
+  "name": "@tutors/tutors-publish",
+  "version": "0.0.1",
+  "exports": "./main.ts",
+  "license": "MIT",
+  "tasks": {
+    "run": "deno run main.ts",
+    "dev": "deno run --watch main.ts"
+  }
+}

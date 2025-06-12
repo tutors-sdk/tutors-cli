@@ -1,0 +1,13 @@
+{
+  "name": "@tutors/tutors-gen-lib",
+  "version": "0.0.1",
+  "exports": "./src/tutors.ts",
+  "license": "MIT",
+  "imports": {
+    "front-matter": "npm:front-matter@^4.0.2",
+    "fs": "node:fs",
+    "path": "node:path",
+    "js-yaml": "npm:js-yaml@^4.1.0",
+    "archiver": "npm:archiver@^5.3.1"
+  }
+}
