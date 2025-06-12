@@ -1,10 +1,21 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@tutors/tutors-gen-lib@^0.0.1": "0.0.1",
     "npm:@types/node@*": "22.15.15",
     "npm:archiver@^5.3.1": "5.3.2",
     "npm:front-matter@^4.0.2": "4.0.2",
     "npm:js-yaml@^4.1.0": "4.1.0"
+  },
+  "jsr": {
+    "@tutors/tutors-gen-lib@0.0.1": {
+      "integrity": "ab076a129456db0cd6741c72656590eedd5427278f6c138d508b0594dbe6da8c",
+      "dependencies": [
+        "npm:archiver",
+        "npm:front-matter",
+        "npm:js-yaml"
+      ]
+    }
   },
   "npm": {
     "@types/node@22.15.15": {
