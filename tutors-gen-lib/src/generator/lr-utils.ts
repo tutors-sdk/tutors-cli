@@ -2,7 +2,7 @@ import path from "node:path";
 import fm from "npm:front-matter@^4.0.2";
 import * as fs from "node:fs";
 import * as yaml from "npm:js-yaml@^4.1.0";
-import { imageTypes, LearningResource, VideoIdentifier, VideoIdentifiers } from "../models/lo-types.ts";
+import { imageTypes, LearningResource, VideoIdentifier, VideoIdentifiers } from "jsr:@tutors/tutors-model-lib";
 import {
   getFileType,
   getHeaderFromBody,
@@ -10,7 +10,7 @@ import {
   readWholeFile,
   withoutHeaderFromBody,
 } from "./file-utils.ts";
-//import { exit } from "node:process";
+import { exit } from "node:process";
 
 export function getFileWithName(lr: LearningResource, file: string) {
   let foundFilePath = "";
@@ -227,7 +227,7 @@ export function readYaml(lr: LearningResource): any {
       );
       console.log(err.message);
       console.log("Review this file and try again....");
-      // exit(1);
+      exit(1);
     }
   }
   return yamlData;

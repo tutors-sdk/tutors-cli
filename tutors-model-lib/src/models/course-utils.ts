@@ -6,8 +6,8 @@ import type {
   Lo,
   LoType,
   Topic,
-} from "@tutors/tutors-gen-lib";
-import { filterByType, setShowHide } from "@tutors/tutors-gen-lib";
+} from "./lo-types.ts";
+import { filterByType, setShowHide } from "./lo-utils.ts";
 
 export function createToc(course: Course) {
   course.los.forEach((lo) => {

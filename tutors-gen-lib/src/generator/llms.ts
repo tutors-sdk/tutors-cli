@@ -1,9 +1,9 @@
-import type { Composite, Course, Lo, Talk, Topic } from "../models/lo-types.ts";
+import type { Composite, Course, Lo, Talk, Topic } from "jsr:@tutors/tutors-model-lib";
 import {
   filterByType,
   flattenLos,
   removeLeadingHashes,
-} from "../models/lo-utils.ts";
+} from "jsr:@tutors/tutors-model-lib";
 import { compressToZip, removeFirstLine, writeFile } from "./file-utils.ts";
 
 let header = "";

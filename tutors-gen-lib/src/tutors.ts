@@ -1,17 +1,11 @@
 import { buildCourse } from "./generator/course-builder.ts";
-import { decorateCourseTree } from "./models/lo-tree.ts";
-import type { Course, Lo } from "./models/lo-types.ts";
+import { decorateCourseTree } from "jsr:@tutors/tutors-model-lib";
+import type { Course, Lo } from "jsr:@tutors/tutors-model-lib";
 import { resourceBuilder } from "./generator/resource-builder.ts";
 import { writeFile } from "./generator/file-utils.ts";
 import { generateNetlifyToml } from "./generator/netlify.ts";
 import { generateLlms } from "./generator/llms.ts";
 
-// Re-export all types
-export * from "./models/lo-types.ts";
-export * from "./models/lo-utils.ts";
-export * from "./models/course-utils.ts";
-export * from "./models/lo-tree.ts";
-export * from "./models/search.ts";
 
 export const version = "3.4.7";
 

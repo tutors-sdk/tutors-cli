@@ -2,7 +2,7 @@ import {
   parseCourse,
   generateCourse,
   version,
-} from "jsr:@tutors/tutors-gen-lib@^0.0.1";
+} from "jsr:@tutors/tutors-gen-lib";
 import * as fs from "node:fs";
 import process from "node:process";
 
