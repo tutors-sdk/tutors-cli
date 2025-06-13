@@ -1,9 +1,9 @@
-import type { Composite, Course, Lo, Talk, Topic } from "jsr:@tutors/tutors-model-lib@0.0.2";
+import type { Composite, Course, Lo, Talk, Topic } from "jsr:@tutors/tutors-model-lib";
 import {
   filterByType,
   flattenLos,
   removeLeadingHashes,
-} from "jsr:@tutors/tutors-model-lib@0.0.2";
+} from "jsr:@tutors/tutors-model-lib";
 import { compressToZip, removeFirstLine, writeFile } from "./file-utils.ts";
 
 let header = "";

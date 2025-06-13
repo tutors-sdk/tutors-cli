@@ -1,13 +1,21 @@
 import {
   parseCourse,
   generateCourse,
-  version,
 } from "jsr:@tutors/tutors-gen-lib";
 import * as fs from "node:fs";
 import process from "node:process";
 
-const versionStr = `tutors-publish: ${version}`;
-console.log(versionStr);
+function getVersionInfo(): string {
+  const denoJsonPath = new URL("./deno.json", import.meta.url).pathname;
+  const denoJson = JSON.parse(fs.readFileSync(denoJsonPath, 'utf-8'));
+  const version = denoJson.version;
+  const genLibVersion = denoJson.imports["@tutors/tutors-gen-lib"].replace("jsr:@tutors/tutors-gen-lib@^", "");
+  const modelLibVersion = denoJson.imports["@tutors/tutors-model-lib"].replace("jsr:@tutors/tutors-model-lib@^" , "");
+
+  return `tutors models: \n- tutors-model-lib: ${modelLibVersion}\n- tutors-gen-lib: ${genLibVersion}\n- tutors-publish: ${version}`;
+}
+
+
 
 if (!fs.existsSync("course.md")) {
   console.log(
@@ -19,4 +27,5 @@ if (!fs.existsSync("course.md")) {
   const lo = parseCourse(srcFolder);
   generateCourse(lo, destFolder);
 }
-console.log(versionStr);
+
+console.log(getVersionInfo());
