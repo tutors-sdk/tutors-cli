@@ -1,6 +1,6 @@
 import { buildCourse } from "./generator/course-builder.ts";
-import { decorateCourseTree } from "jsr:@tutors/tutors-model-lib@^0.0.2";
-import type { Course, Lo } from "jsr:@tutors/tutors-model-lib@^0.0.2";
+import { decorateCourseTree } from "@tutors/tutors-model-lib";
+import type { Course, Lo } from "@tutors/tutors-model-lib";
 import { resourceBuilder } from "./generator/resource-builder.ts";
 import { writeFile } from "./generator/file-utils.ts";
 import { generateNetlifyToml } from "./generator/netlify.ts";
