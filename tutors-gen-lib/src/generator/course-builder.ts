@@ -18,15 +18,15 @@ import {
   removeLeadingHashes,
 } from "./lr-utils.ts";
 import {
-  Archive,
-  Composite,
-  Course,
+  type Archive,
+  type Composite,
+  type Course,
   isCompositeLo,
-  Lab,
-  LearningResource,
-  Lo,
+  type Lab,
+  type LearningResource,
+  type Lo,
   preOrder,
-  Talk,
+  type Talk,
 } from "jsr:@tutors/tutors-model-lib";
 import { readWholeFile, readYamlFile } from "./file-utils.ts";
 import fm from "npm:front-matter@^4.0.2";
