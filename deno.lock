@@ -360,7 +360,7 @@
       },
       "tutors-publish": {
         "dependencies": [
-          "jsr:@tutors/tutors-gen-lib@^0.0.13",
+          "jsr:@tutors/tutors-gen-lib@^0.0.14",
           "jsr:@tutors/tutors-model-lib@^0.0.2"
         ]
       }
