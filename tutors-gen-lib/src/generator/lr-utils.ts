@@ -10,7 +10,7 @@ import {
   readWholeFile,
   withoutHeaderFromBody,
 } from "./file-utils.ts";
-import { exit } from "node:process";
+//import { exit } from "node:process";
 
 export function getFileWithName(lr: LearningResource, file: string) {
   let foundFilePath = "";
@@ -227,7 +227,7 @@ export function readYaml(lr: LearningResource): any {
       );
       console.log(err.message);
       console.log("Review this file and try again....");
-      exit(1);
+      // exit(1);
     }
   }
   return yamlData;
