@@ -9,6 +9,7 @@ import mark from "markdown-it-mark";
 import footnote from "markdown-it-footnote";
 import deflist from "markdown-it-deflist";
 import { addCopyButton } from "shiki-transformer-copy-button";
+import type { Course, Lo } from "./lo-types.ts";
 
 const options = {
   // delay time from "copied" state back to normal state
@@ -95,4 +96,48 @@ markdownIt.renderer.rules.link_open = function (tokens: any, idx: any, options: 
 export function convertMdToHtml(md: string, codeTheme: string = "ayu-dark"): string {
   currentTheme = codeTheme;
   return markdownIt.render(md);
+}
+
+export function convertLoToHtml(course: Course, lo: Lo) {
+  if (lo.type === "lab" || lo.type == "note") {
+    // converted elsewhere
+  } else {
+    if (lo.summary) lo.summary = convertMdToHtml(lo.summary);
+    let md = lo.contentMd;
+    if (md) {
+      if (course.courseUrl) {
+        const url = lo.route.replace(`/${lo.type}/${course.courseId}`, course.courseUrl);
+        md = filter(md, url);
+      }
+      lo.contentHtml = convertMdToHtml(md);
+    }
+  }
+}
+
+/**
+   * Replaces all occurrences of a string pattern
+   * @param str - Source string
+   * @param find - Pattern to find
+   * @param replace - Replacement string
+   * @returns Updated string
+   */
+function replaceAll(str: string, find: string, replace: string) {
+  return str.replace(new RegExp(find, "g"), replace);
+}
+
+/**
+ * Processes markdown content to fix relative URLs
+ * Handles images, archives, and internal links
+ * @param src - Source markdown content
+ * @param url - Base URL for converting relative paths
+ * @returns Processed markdown content
+ */
+function filter(src: string, url: string): string {
+  let filtered = replaceAll(src, "./img\\/", `img/`);
+  filtered = replaceAll(filtered, "img\\/", `https://${url}/img/`);
+  filtered = replaceAll(filtered, "./archives\\/", `archives/`);
+  filtered = replaceAll(filtered, "(?<!/)archives\\/", `https://${url}/archives/`);
+  filtered = replaceAll(filtered, "(?<!/)archive\\/(?!refs)", `https://${url}/archive/`);
+  filtered = replaceAll(filtered, "\\]\\(\\#", `](https://${url}#/`);
+  return filtered;
 }

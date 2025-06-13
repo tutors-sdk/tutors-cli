@@ -22,7 +22,7 @@ import {
   initCalendar,
   loadPropertyFlags,
 } from "./course-utils.ts";
-// import { markdownService } from "$lib/services/markdown";
+import { convertLoToHtml } from "./markdown-utils.ts";
 
 export function decorateCourseTree(
   course: Course,
@@ -83,7 +83,7 @@ export function decorateLoTree(course: Course, lo: Lo) {
   }
 
   // Convert summary and contentMd to html
-  // markdownService.convertLoToHtml(course, lo);
+  convertLoToHtml(course, lo);
 
   if (isCompositeLo(lo)) {
     // if Lo is composite, recursively decorate all child los
