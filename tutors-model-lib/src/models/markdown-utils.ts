@@ -132,7 +132,7 @@ function replaceAll(str: string, find: string, replace: string) {
  * @param url - Base URL for converting relative paths
  * @returns Processed markdown content
  */
-function filter(src: string, url: string): string {
+export function filter(src: string, url: string): string {
   let filtered = replaceAll(src, "./img\\/", `img/`);
   filtered = replaceAll(filtered, "img\\/", `https://${url}/img/`);
   filtered = replaceAll(filtered, "./archives\\/", `archives/`);
