@@ -1,9 +1,10 @@
 {
   "name": "@tutors/tutors-gen-lib",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "exports": "./src/tutors.ts",
   "license": "MIT",
   "imports": {
+    "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib",
     "front-matter": "npm:front-matter@^4.0.2",
     "fs": "node:fs",
     "path": "node:path",
