@@ -8,7 +8,7 @@
     "dev": "deno run --watch main.ts"
   },
   "imports": {
-    "@tutors/tutors-gen-lib": "jsr:@tutors/tutors-gen-lib@^0.0.11",
+    "@tutors/tutors-gen-lib": "jsr:@tutors/tutors-gen-lib@^0.0.13",
     "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0.0.2"
   }
 }
