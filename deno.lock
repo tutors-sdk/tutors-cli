@@ -2,9 +2,6 @@
   "version": "5",
   "specifiers": {
     "jsr:@tutors/tutors-gen-lib@^0.0.1": "0.0.1",
-    "jsr:@tutors/tutors-gen-lib@^0.0.11": "0.0.11",
-    "jsr:@tutors/tutors-model-lib@0.0.2": "0.0.2",
-    "jsr:@tutors/tutors-model-lib@^0.0.2": "0.0.2",
     "npm:@types/node@*": "22.15.15",
     "npm:archiver@^5.3.1": "5.3.2",
     "npm:front-matter@^4.0.2": "4.0.2",
@@ -19,16 +16,13 @@
         "npm:js-yaml"
       ]
     },
-    "@tutors/tutors-gen-lib@0.0.11": {
-      "integrity": "7666e481cbbdc8b726195bf4b67da8651c31f5284dd0dd51ece1788296379c3e",
+    "@tutors/tutors-gen-lib@0.0.13": {
+      "integrity": "eaa54dbb7fbbbd8f262efb9d74d676dad801452da38f843516fdab580f3d9055",
       "dependencies": [
         "npm:archiver",
         "npm:front-matter",
         "npm:js-yaml"
       ]
-    },
-    "@tutors/tutors-model-lib@0.0.2": {
-      "integrity": "b70319543ca641820f36773c036cc2a28986a6e493fbd14205c797533d9306b6"
     }
   },
   "npm": {
@@ -351,7 +345,7 @@
     "members": {
       "tutors-gen-lib": {
         "dependencies": [
-          "jsr:@tutors/tutors-model-lib@0.0.2",
+          "jsr:@tutors/tutors-model-lib@^0.0.2",
           "npm:archiver@^5.3.1",
           "npm:front-matter@^4.0.2",
           "npm:js-yaml@^4.1.0"
@@ -366,7 +360,7 @@
       },
       "tutors-publish": {
         "dependencies": [
-          "jsr:@tutors/tutors-gen-lib@^0.0.11",
+          "jsr:@tutors/tutors-gen-lib@^0.0.13",
           "jsr:@tutors/tutors-model-lib@^0.0.2"
         ]
       }
