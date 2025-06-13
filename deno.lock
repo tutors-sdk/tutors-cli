@@ -337,7 +337,7 @@
     "members": {
       "tutors-gen-lib": {
         "dependencies": [
-          "jsr:@tutors/tutors-model-lib@*",
+          "jsr:@tutors/tutors-model-lib@0.0.2",
           "npm:archiver@^5.3.1",
           "npm:front-matter@^4.0.2",
           "npm:js-yaml@^4.1.0"
