@@ -1,4 +1,4 @@
-import type { Composite, Course, Lo, Talk, Topic } from "jsr:@tutors/tutors-model-lib";
+import type { Composite, Course, Lo, Talk, Topic } from "jsr:@tutors/tutors-model-lib@^0.0.2";
 import {
   filterByType,
   flattenLos,

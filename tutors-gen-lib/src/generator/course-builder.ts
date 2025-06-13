@@ -27,7 +27,7 @@ import {
   type Lo,
   preOrder,
   type Talk,
-} from "jsr:@tutors/tutors-model-lib";
+} from "jsr:@tutors/tutors-model-lib@^0.0.2";
 import { readWholeFile, readYamlFile } from "./file-utils.ts";
 import fm from "npm:front-matter@^4.0.2";
 
