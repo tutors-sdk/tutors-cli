@@ -24,7 +24,7 @@ export function initHighlighter(codeHighlighter: any) {
   customHighlighter = codeHighlighter;
 }
 
-export const markdownIt = new MarkdownIt({
+export const markdownIt: MarkdownIt = new MarkdownIt({
   html: true, // Enable HTML tags in source
   xhtmlOut: false, // Use '/' to close single tags (<br />).
   breaks: false, // Convert '\n' in paragraphs into <br>

@@ -137,7 +137,7 @@ function getFenceType(content: string, indexSearchTerm: number): string {
  * @param astring String to parse for path (route).
  * @return The path
  */
-export function extractPath(astring: string) {
+export function extractPath(astring: string): string {
   const regex = /#/;
   astring = astring.replace(regex, "#/");
   const start = astring.indexOf("#");
@@ -152,10 +152,10 @@ export function extractPath(astring: string) {
  * @returns true if valid else false.
  */
 
-function onlySpaces(str: string) {
+function onlySpaces(str: string): boolean {
   return str.trim().length === 0;
 }
-export function isValid(str: string) {
+export function isValid(str: string): boolean {
   // return str != undefined && /\S/.test(str) == true;
   return !onlySpaces(str);
 }

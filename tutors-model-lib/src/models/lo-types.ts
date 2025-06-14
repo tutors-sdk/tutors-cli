@@ -39,7 +39,7 @@ export const imageTypes = [
 /**
  * Supported asset file types, including images and documents
  */
-export const assetTypes = imageTypes.concat([
+export const assetTypes: string[] = imageTypes.concat([
   "pdf",
   "zip",
   "html",
@@ -363,7 +363,7 @@ export const loCompositeTypes = ["unit", "side", "topic", "course"];
  * All learning object types
  * Used for type checking and filtering
  */
-export const loTypes = simpleTypes.concat(loCompositeTypes);
+export const loTypes: string[] = simpleTypes.concat(loCompositeTypes);
 
 /**
  * Type alias for learning object types
@@ -375,7 +375,7 @@ export type LoType = (typeof loTypes)[number];
  * @param lo Learning object to check
  * @returns boolean indicating if Lo is composite
  */
-export function isCompositeLo(lo: Lo) {
+export function isCompositeLo(lo: Lo):boolean {
   return loCompositeTypes.includes(lo.type);
 }
 
@@ -383,7 +383,7 @@ export function isCompositeLo(lo: Lo) {
  * Learning object type ordering
  * Used for sorting and display
  */
-export const preOrder = new Map([
+export const preOrder: Map<string, number> = new Map([
   ["unit", 1],
   ["side", 2],
   ["talk", 3],
