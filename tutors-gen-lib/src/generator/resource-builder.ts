@@ -29,7 +29,7 @@ export const resourceBuilder = {
       files: [],
       id: path.basename(dir),
     };
-    const files = fs.readdirSync(dir);
+    const files = fs.readdirSync(dir).sort();
     if (files.length > 0) {
       for (const file of files) {
         const filePath = `${dir}/${file}`;

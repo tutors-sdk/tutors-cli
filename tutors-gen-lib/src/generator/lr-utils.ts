@@ -1,7 +1,7 @@
 import path from "node:path";
-import fm from "npm:front-matter@^4.0.2";
+import fm from "front-matter";
 import * as fs from "node:fs";
-import * as yaml from "npm:js-yaml@^4.1.0";
+import * as yaml from "js-yaml";
 import { imageTypes, type LearningResource, type VideoIdentifier, type VideoIdentifiers } from "@tutors/tutors-model-lib";
 import {
   getFileType,

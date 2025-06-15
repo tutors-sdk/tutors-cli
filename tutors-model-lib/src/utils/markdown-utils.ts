@@ -9,7 +9,7 @@ import mark from "markdown-it-mark";
 import footnote from "markdown-it-footnote";
 import deflist from "markdown-it-deflist";
 import { addCopyButton } from "shiki-transformer-copy-button";
-import type { Course, Lo } from "./lo-types.ts";
+import type { Lo, Course } from "../types/index.ts";
 
 const options = {
   // delay time from "copied" state back to normal state

@@ -1,13 +1,6 @@
 // import { themeService } from "$lib/services/themes/services/themes.svelte";
-import type {
-  IconNav,
-  Composite,
-  Course,
-  Lo,
-  LoType,
-  Topic,
-} from "./lo-types.ts";
-import { filterByType, setShowHide } from "./lo-utils.ts";
+import type { IconNav, Lo, Composite, Course, Topic, LoType } from "../types/index.ts";
+import { filterByType, setShowHide } from "../utils/lo-utils.ts";
 
 export function createToc(course: Course) {
   course.los.forEach((lo) => {

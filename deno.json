@@ -10,6 +10,7 @@
   },
   "tasks": {
     "fmt": "deno fmt",
-    "fmt:check": "deno fmt --check"
+    "fmt:check": "deno fmt --check",
+    "publish": "deno publish --no-check --dry-run"
   }
 }

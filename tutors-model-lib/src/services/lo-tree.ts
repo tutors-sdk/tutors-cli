@@ -1,10 +1,5 @@
-import {
-  isCompositeLo,
-  type Course,
-  type Lo,
-  type Composite,
-  type Topic,
-} from "./lo-types.ts";
+import { isCompositeLo } from "../types/type-utils.ts";
+import type { Lo, Course, Composite, Topic } from "../types/index.ts";
 import {
   allVideoLos,
   crumbs,
@@ -15,14 +10,14 @@ import {
   injectCourseUrl,
   removeUnknownLos,
   filterByType,
-} from "./lo-utils.ts";
+} from "../utils/lo-utils.ts";
 import {
   createCompanions,
   createWalls,
   initCalendar,
   loadPropertyFlags,
-} from "./course-utils.ts";
-import { convertLoToHtml } from "./markdown-utils.ts";
+} from "../utils/course-utils.ts";
+import { convertLoToHtml } from "../utils/markdown-utils.ts";
 
 export function decorateCourseTree(
   course: Course,

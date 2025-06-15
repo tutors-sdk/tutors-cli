@@ -29,7 +29,7 @@ import {
   type Talk,
 } from "@tutors/tutors-model-lib";
 import { readWholeFile, readYamlFile } from "./file-utils.ts";
-import fm from "npm:front-matter@^4.0.2";
+import fm from "front-matter";
 
 function buildTalk(lo: Lo, lr: LearningResource) {
   const talk = lo as Talk;
@@ -149,10 +149,11 @@ function buildCompositeLo(lo: Lo, lr: LearningResource, level: number): Lo {
   lr.lrs.forEach((lr) => {
     const subLo = buildLo(lr, level + 1);
     if (subLo.type !== "unknown") compositeLo.los.push(subLo);
-    compositeLo.los.sort((a: any, b: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return preOrder.get(a.type)! - preOrder.get(b.type)!;
-    });
+  });
+  compositeLo.los.sort((a: Lo, b: Lo) => {
+    const aOrder = preOrder.get(a.type) ?? Number.MAX_SAFE_INTEGER;
+    const bOrder = preOrder.get(b.type) ?? Number.MAX_SAFE_INTEGER;
+    return aOrder - bOrder;
   });
   return lo;
 }
@@ -173,6 +174,7 @@ function buildDefaultLo(lr: LearningResource, keyFileName: string = ""): Lo {
     video: getVideo(lr, videoids.videoid),
     videoids: videoids,
     hide: false,
+    authLevel: 0
   };
   return lo;
 }

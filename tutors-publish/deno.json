@@ -9,6 +9,6 @@
   },
   "imports": {
     "@tutors/tutors-gen-lib": "jsr:@tutors/tutors-gen-lib@^0.0.14",
-    "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0.0.2"
+    "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0.0.7"
   }
 }

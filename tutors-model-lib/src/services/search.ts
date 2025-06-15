@@ -1,6 +1,5 @@
-import type { Lo } from "./lo-types.ts";
-import { removeLeadingHashes } from "./lo-utils.ts";
-
+import type { Lo } from "../types/index.ts";
+import { removeLeadingHashes } from "../utils/lo-utils.ts";
 
 const maxNumberHits = 100;
 const fenceTick = "```";
