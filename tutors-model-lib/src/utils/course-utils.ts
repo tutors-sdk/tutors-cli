@@ -156,10 +156,14 @@ export function loadPropertyFlags(course: Course) {
 
   course.hasWhiteList = false;
   course.ignorePin = course.properties?.ignorepin?.toString();
-  if (course.properties?.icon) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    course.icon = course.properties.icon;
+  if (course.properties?.icon && typeof course.properties.icon === 'object') {
+    const icon = course.properties.icon as { type?: string; color?: string };
+    if (icon.type && icon.color) {
+      course.icon = {
+        type: icon.type,
+        color: icon.color
+      };
+    }
   }
   course.los.forEach((lo) => {
     if (lo.hide) {
@@ -169,7 +173,7 @@ export function loadPropertyFlags(course: Course) {
 }
 
 export function initCalendar(course: Course) {
-  const calendar = {
+  const calendar: { title: string; weeks: Array<{ date: string; title: string; type: string; dateObj: Date }> } = {
     title: "unknown",
     weeks: [],
   };
@@ -177,34 +181,32 @@ export function initCalendar(course: Course) {
     if (course.calendar) {
       const calendarObj = course.calendar;
       calendar.title = calendarObj.title;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      calendar.weeks = calendarObj.weeks.map((weekObj: any) => ({
-        date: Object.keys(weekObj)[0],
-        title: weekObj[Object.keys(weekObj)[0]].title,
-        type: weekObj[Object.keys(weekObj)[0]].type,
-        dateObj: new Date(Object.keys(weekObj)[0]),
-      }));
+      if (Array.isArray(calendarObj.weeks)) {
+        calendar.weeks = calendarObj.weeks.map((weekObj: Record<string, { title: string; type: string }>) => {
+          const date = Object.keys(weekObj)[0];
+          const weekData = weekObj[date];
+          return {
+            date,
+            title: weekData.title,
+            type: weekData.type,
+            dateObj: new Date(date)
+          };
+        });
+      }
 
       const today = Date.now();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       const currentWeek = calendar.weeks.find(
         (week, i) =>
           today > Date.parse(week.date) &&
           today <= Date.parse(calendar.weeks[i + 1]?.date)
       );
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       course.courseCalendar = {
         title: calendarObj.title,
         weeks: calendar.weeks,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         currentWeek: currentWeek,
       };
     }
-  } catch (e) {
+  } catch (_e) {
     console.log("Error loading calendar");
   }
 }
