@@ -18,5 +18,5 @@ export type WeekType = {
 export type Calendar = {
   title: string;
   weeks: WeekType[];
-  currentWeek: WeekType;
+  currentWeek?: WeekType;
 };
