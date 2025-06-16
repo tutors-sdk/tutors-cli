@@ -1,5 +1,6 @@
 import path from "node:path";
-import fm from "front-matter";
+import frontMatterModule from "front-matter";
+const frontMatter = frontMatterModule.default || frontMatterModule;
 import * as fs from "node:fs";
 import * as yaml from "js-yaml";
 import { imageTypes, type LearningResource, type VideoIdentifier, type VideoIdentifiers } from "@tutors/tutors-model-lib";
@@ -165,12 +166,12 @@ export function getMarkdown(
     mdFile = getFileWithType(lr, ["md"]);
   }
   if (mdFile) {
-    const contents = fm(readWholeFile(mdFile));
-    const frontMatter = contents.attributes;
+    const contents = frontMatter(readWholeFile(mdFile));
+    const frontMatterSection = contents.attributes;
     const title = getHeaderFromBody(contents.body);
     const summary = withoutHeaderFromBody(contents.body);
     const contentsMd = contents.body;
-    return [title, summary, contentsMd, frontMatter];
+    return [title, summary, contentsMd, frontMatterSection];
   } else {
     return ["", "", "", {}];
   }

@@ -1,3 +1,6 @@
+import frontMatterModule from "front-matter";
+const frontMatter = frontMatterModule.default || frontMatterModule;
+
 import {
   getArchiveFile,
   getFilesWithType,
@@ -29,7 +32,6 @@ import {
   type Talk,
 } from "@tutors/tutors-model-lib";
 import { readWholeFile, readYamlFile } from "./file-utils.ts";
-import fm from "front-matter";
 
 function buildTalk(lo: Lo, lr: LearningResource) {
   const talk = lo as Talk;
@@ -65,7 +67,7 @@ function buildLab(lo: Lo, lr: LearningResource): Lo {
   lo.title = "";
   mdFiles.forEach((chapterName) => {
     const wholeFile = readWholeFile(chapterName);
-    const contents = fm(wholeFile);
+    const contents = frontMatter(wholeFile);
     let theTitle = contents.body.substring(0, contents.body.indexOf("\n"));
     theTitle = theTitle.replace("\r", "");
     theTitle = removeLeadingHashes(theTitle);
