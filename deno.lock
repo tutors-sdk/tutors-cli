@@ -2,7 +2,6 @@
   "version": "5",
   "specifiers": {
     "jsr:@tutors/tutors-gen-lib@^0.0.1": "0.0.1",
-    "jsr:@tutors/tutors-gen-lib@^0.0.14": "0.0.14",
     "npm:@iktakahiro/markdown-it-katex@^4.0.1": "4.0.1",
     "npm:@types/node@*": "22.15.15",
     "npm:archiver@^5.3.1": "5.3.2",
@@ -31,14 +30,6 @@
     },
     "@tutors/tutors-gen-lib@0.0.13": {
       "integrity": "eaa54dbb7fbbbd8f262efb9d74d676dad801452da38f843516fdab580f3d9055",
-      "dependencies": [
-        "npm:archiver",
-        "npm:front-matter@^4.0.2",
-        "npm:js-yaml"
-      ]
-    },
-    "@tutors/tutors-gen-lib@0.0.14": {
-      "integrity": "b55bee3b38d35f91c0f1f3dea938dba1d584fb67d72ddf4ab1e06ad3b9e8a68c",
       "dependencies": [
         "npm:archiver",
         "npm:front-matter@^4.0.2",
@@ -493,7 +484,7 @@
     "members": {
       "tutors-gen-lib": {
         "dependencies": [
-          "jsr:@tutors/tutors-model-lib@^0.0.7",
+          "jsr:@tutors/tutors-model-lib@^0.0.15",
           "npm:archiver@^5.3.1",
           "npm:front-matter@^4.0.2",
           "npm:js-yaml@^4.1.0"
@@ -519,8 +510,8 @@
       },
       "tutors-publish": {
         "dependencies": [
-          "jsr:@tutors/tutors-gen-lib@^0.0.14",
-          "jsr:@tutors/tutors-model-lib@^0.0.7"
+          "jsr:@tutors/tutors-gen-lib@^0.0.15",
+          "jsr:@tutors/tutors-model-lib@^0.0.15"
         ]
       }
     }
