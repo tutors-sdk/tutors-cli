@@ -1,11 +1,11 @@
-import type {
-  LoType,
-  VideoIdentifier,
-  Archive, Lab, Talk,
-  Composite, Side, Unit, Units,
-  IconType, Lo,
-  PanelNote, Panels, PanelTalk, PanelVideo,
-  isCompositeLo
+import {
+  type LoType,
+  type VideoIdentifier,
+  type Archive, type Lab, type Talk,
+  type Composite, type Side, type Unit, type Units,
+  type IconType, type Lo,
+  type PanelNote, type Panels, type PanelTalk, type PanelVideo,
+  isCompositeLo,
 } from "../types/index.ts";
 
 export function flattenLos(los: Lo[]): Lo[] {
