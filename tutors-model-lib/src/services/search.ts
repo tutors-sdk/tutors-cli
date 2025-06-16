@@ -183,13 +183,12 @@ function indicesOf(str: string, substr: string): number[] {
         n += arIndx[arIndx.length - 1] + substr.length;
       }
       arIndx.push(n);
-      indicesOf(str.slice(prev_n + substr.length), substr, arIndx);
+      return indicesOf(str.slice(prev_n + 1), substr, arIndx);
     } else {
-      return;
+      return arIndx;
     }
   }
-  indicesOf(str, substr, arIndx);
-  return arIndx;
+  return indicesOf(str, substr, arIndx);
 }
 
 /**
