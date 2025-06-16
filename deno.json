@@ -11,7 +11,7 @@
   "tasks": {
     "fmt": "deno fmt",
     "fmt:check": "deno fmt --check",
-    "publish": "deno publish --no-check",
-    "publish-test": "deno publish --no-check --dry-run"
+    "publish": "deno publish",
+    "publish-test": "deno publish --dry-run"
   }
 }

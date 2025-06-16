@@ -6,6 +6,7 @@
     "npm:@iktakahiro/markdown-it-katex@^4.0.1": "4.0.1",
     "npm:@types/node@*": "22.15.15",
     "npm:archiver@^5.3.1": "5.3.2",
+    "npm:front-matter@*": "4.0.2",
     "npm:front-matter@^4.0.2": "4.0.2",
     "npm:js-yaml@^4.1.0": "4.1.0",
     "npm:markdown-it-anchor@^9.2.0": "9.2.0_@types+markdown-it@14.1.2_markdown-it@14.1.0",
@@ -24,7 +25,7 @@
       "integrity": "ab076a129456db0cd6741c72656590eedd5427278f6c138d508b0594dbe6da8c",
       "dependencies": [
         "npm:archiver",
-        "npm:front-matter",
+        "npm:front-matter@^4.0.2",
         "npm:js-yaml"
       ]
     },
@@ -32,7 +33,7 @@
       "integrity": "eaa54dbb7fbbbd8f262efb9d74d676dad801452da38f843516fdab580f3d9055",
       "dependencies": [
         "npm:archiver",
-        "npm:front-matter",
+        "npm:front-matter@^4.0.2",
         "npm:js-yaml"
       ]
     },
@@ -40,7 +41,7 @@
       "integrity": "b55bee3b38d35f91c0f1f3dea938dba1d584fb67d72ddf4ab1e06ad3b9e8a68c",
       "dependencies": [
         "npm:archiver",
-        "npm:front-matter",
+        "npm:front-matter@^4.0.2",
         "npm:js-yaml"
       ]
     }
