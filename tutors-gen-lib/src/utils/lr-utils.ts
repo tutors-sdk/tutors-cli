@@ -5,6 +5,7 @@ import * as fs from "node:fs";
 import * as yaml from "js-yaml";
 import { imageTypes, type LearningResource, type VideoIdentifier, type VideoIdentifiers } from "@tutors/tutors-model-lib";
 import { getFileType, getHeaderFromBody, readFirstLineFromFile, readWholeFile, withoutHeaderFromBody } from "./file-utils.ts";
+import process from "node:process";
 
 export function getFileWithName(lr: LearningResource, file: string) {
   let foundFilePath = "";
@@ -221,7 +222,7 @@ export function readYaml(lr: LearningResource): any {
       );
       console.log(err.message);
       console.log("Review this file and try again....");
-      exit(1);
+      process.exit(1);
     }
   }
   return yamlData;
