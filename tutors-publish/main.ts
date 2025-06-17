@@ -16,4 +16,4 @@ if (!fs.existsSync("course.md")) {
   generateCourse(lo, destFolder);
 }
 
-console.log("Tutors Generator v0.0.15");
+console.log("Tutors Generator v0.0.17");

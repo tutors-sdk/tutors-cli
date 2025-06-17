@@ -55,7 +55,7 @@ export function searchHits(los: Lo[], searchTerm: string): ResultType[] {
           lab: lo,
           title: `${lo.parentLo?.title}/${removeLeadingHashes(lo.title)}`,
           link: lo?.route,
-          html: ""
+          html: "",
         };
         result.link = result.link.substring(1);
         results.push(result);
@@ -111,7 +111,6 @@ function getLanguage(content: string, indexSearchTerm: number): string {
 }
 
 /**
- *
  * @param content the fence type may comprise tildes or ticks.
  * @param indexSearchTerm
  * @returns fence type: string comprising 3 tildes or 3 ticks.
@@ -211,7 +210,6 @@ function numericSort(ar: number[]) {
 }
 
 /**
- *
  * Determines if a searchTerm resides within fenced section of page.
  * The fence may be defined as ticks or tildes.
  * @param content The string containing the searchTerm.
@@ -283,12 +281,10 @@ function findNearestPreviousIndex(indices: number[], currIndex: number): [number
   return [-1, -1];
 }
 /**
- *
  * @param indices An array of indices of separators (such as \n).
  * @param currIndex The index of the searchTerm.
  * @param contentLen The index of the last character of the current page.
  * @returns An array of tuples, each tuple containing the array index and the index immediately following the current index.
- *
  */
 function findNearestNextIndex(indices: number[], currIndex: number, contentLen: number): [number, number] {
   for (let i = 0; i < indices.length; i += 1) {
@@ -302,7 +298,6 @@ function findNearestNextIndex(indices: number[], currIndex: number, contentLen: 
 }
 
 /**
- *
  * @returns new line character as string.
  */
 function separator(): string {

@@ -19,19 +19,9 @@ import {
   getWebLink,
   readVideoIds,
   removeLeadingHashes,
-} from "./lr-utils.ts";
-import {
-  type Archive,
-  type Composite,
-  type Course,
-  isCompositeLo,
-  type Lab,
-  type LearningResource,
-  type Lo,
-  preOrder,
-  type Talk,
-} from "@tutors/tutors-model-lib";
-import { readWholeFile, readYamlFile } from "./file-utils.ts";
+} from "../utils/lr-utils.ts";
+import { type Archive, type Composite, type Course, isCompositeLo, type Lab, type LearningResource, type Lo, preOrder, type Talk } from "@tutors/tutors-model-lib";
+import { readWholeFile, readYamlFile } from "../utils/file-utils.ts";
 
 function buildTalk(lo: Lo, lr: LearningResource) {
   const talk = lo as Talk;
@@ -176,7 +166,7 @@ function buildDefaultLo(lr: LearningResource, keyFileName: string = ""): Lo {
     video: getVideo(lr, videoids.videoid),
     videoids: videoids,
     hide: false,
-    authLevel: 0
+    authLevel: 0,
   };
   return lo;
 }

@@ -1,11 +1,20 @@
 import {
-  type LoType,
-  type VideoIdentifier,
-  type Archive, type Lab, type Talk,
-  type Composite, type Side, type Unit, type Units,
-  type IconType, type Lo,
-  type PanelNote, type Panels, type PanelTalk, type PanelVideo,
+  type Archive,
+  type Composite,
+  type IconType,
   isCompositeLo,
+  type Lab,
+  type Lo,
+  type LoType,
+  type PanelNote,
+  type Panels,
+  type PanelTalk,
+  type PanelVideo,
+  type Side,
+  type Talk,
+  type Unit,
+  type Units,
+  type VideoIdentifier,
 } from "../types/index.ts";
 
 export function flattenLos(los: Lo[]): Lo[] {
@@ -50,10 +59,12 @@ export function injectCourseUrl(los: Lo[], id: string, url: string) {
   los.forEach((lo) => {
     if (lo.type === "archive") {
       const archive: Archive = lo as Archive;
-      archive.route = `https://${lo.route?.replace(
-        "/archive/{{COURSEURL}}",
-        url
-      )}/${archive.archiveFile}`;
+      archive.route = `https://${
+        lo.route?.replace(
+          "/archive/{{COURSEURL}}",
+          url,
+        )
+      }/${archive.archiveFile}`;
     } else {
       lo.route = lo.route?.replace("{{COURSEURL}}", id);
     }
@@ -113,7 +124,7 @@ export function getUnits(los: Lo[]): Units {
       lo.type !== "panelvideo" &&
       lo.type !== "paneltalk" &&
       lo.type !== "panelnote" &&
-      lo.type !== "side"
+      lo.type !== "side",
   );
   standardLos = sortLos(standardLos);
   return {
@@ -127,7 +138,7 @@ export function sortLos(los: Array<Lo>): Lo[] {
   const orderedLos = los.filter((lo) => lo.frontMatter?.order);
   const unOrderedLos = los.filter((lo) => !lo.frontMatter?.order);
   orderedLos.sort(
-    (a: any, b: any) => a.frontMatter.order - b.frontMatter.order
+    (a: any, b: any) => a.frontMatter.order - b.frontMatter.order,
   );
   return orderedLos.concat(unOrderedLos);
 }

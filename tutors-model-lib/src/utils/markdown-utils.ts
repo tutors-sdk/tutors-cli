@@ -9,11 +9,11 @@ import mark from "markdown-it-mark";
 import footnote from "markdown-it-footnote";
 import deflist from "markdown-it-deflist";
 import { addCopyButton } from "shiki-transformer-copy-button";
-import type { Lo, Course } from "../types/index.ts";
+import type { Course, Lo } from "../types/index.ts";
 
 const options = {
   // delay time from "copied" state back to normal state
-  toggle: 2000
+  toggle: 2000,
 };
 
 let currentTheme = "ayu-dark";
@@ -39,16 +39,16 @@ export const markdownIt: MarkdownIt = new MarkdownIt({
       return customHighlighter?.codeToHtml(str, {
         lang: "",
         theme: currentTheme,
-        transformers: [addCopyButton(options)]
+        transformers: [addCopyButton(options)],
       });
     }
-  }
+  },
 });
 
 const tocOptions = { includeLevel: [1, 2, 3] };
 markdownIt.use(latex);
 markdownIt.use(anchor, {
-  permalink: anchor.permalink.headerLink()
+  permalink: anchor.permalink.headerLink(),
 });
 
 markdownIt.use(toc, tocOptions);
@@ -65,11 +65,10 @@ markdownIt.renderer.rules.blockquote_open = () => {
 };
 
 markdownIt.renderer.rules.blockquote_close = () => {
-  return '</div>';
+  return "</div>";
 };
 
-const defaultRender =
-  markdownIt.renderer.rules.link_open ||
+const defaultRender = markdownIt.renderer.rules.link_open ||
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function (tokens: any, idx: any, options: any, env: any, self: any) {
     return self.renderToken(tokens, idx, options);
@@ -115,12 +114,12 @@ export function convertLoToHtml(course: Course, lo: Lo) {
 }
 
 /**
-   * Replaces all occurrences of a string pattern
-   * @param str - Source string
-   * @param find - Pattern to find
-   * @param replace - Replacement string
-   * @returns Updated string
-   */
+ * Replaces all occurrences of a string pattern
+ * @param str - Source string
+ * @param find - Pattern to find
+ * @param replace - Replacement string
+ * @returns Updated string
+ */
 function replaceAll(str: string, find: string, replace: string) {
   return str.replace(new RegExp(find, "g"), replace);
 }

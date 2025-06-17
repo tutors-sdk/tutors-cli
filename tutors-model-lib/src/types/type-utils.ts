@@ -2,8 +2,14 @@
  * Utility types and functions for learning objects
  */
 
-import type { Lo } from "./composite-los.ts";
+import type { Lo } from "./learning-objects.ts";
 
+/**
+ * Dynamic property collection for learning objects
+ */
+export class Properties {
+  [key: string]: string;
+}
 
 /**
  * Simple learning object types
@@ -68,3 +74,24 @@ export const preOrder: Map<string, number> = new Map([
   ["paneltalk", 12],
   ["panelvideo", 13],
 ]);
+
+/**
+ * Student interaction tracking for learning objects
+ */
+export interface LearningRecord {
+  date: Date;
+  pageLoads: number;
+  timeActive: number;
+}
+
+/**
+ * Base structure for learning resources
+ */
+export type LearningResource = {
+  courseRoot: string;
+  route: string;
+  id: string;
+  lrs: LearningResource[];
+  files: Array<string>;
+  type: string;
+};

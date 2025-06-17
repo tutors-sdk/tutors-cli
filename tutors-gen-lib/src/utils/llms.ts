@@ -14,9 +14,7 @@ export function toSnakeCase(str: string): string {
 function printLo(lo: Lo, level: number) {
   const title = removeLeadingHashes(lo.title);
   const contentMd = removeFirstLine(lo.contentMd);
-  return `${"#".repeat(level)} ${
-    lo.type.charAt(0).toUpperCase() + lo.type.slice(1)
-  } : ${title}\n\n ${contentMd}`;
+  return `${"#".repeat(level)} ${lo.type.charAt(0).toUpperCase() + lo.type.slice(1)} : ${title}\n\n ${contentMd}`;
 }
 
 function generateLo(lo: Lo, llmsTxt: string[], level: number) {
@@ -41,7 +39,7 @@ function generatePdfs(pdfs: Talk[], folder: string) {
   let pdfFiles: string[] = [];
   for (const pdf of pdfs) {
     const relativeRoute = pdf.route.substring(
-      pdf.route.indexOf("{{COURSEURL}}") + "{{COURSEURL}}".length
+      pdf.route.indexOf("{{COURSEURL}}") + "{{COURSEURL}}".length,
     );
     pdfFiles.push(`./${relativeRoute}/${pdf.pdfFile}`);
   }

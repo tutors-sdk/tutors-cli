@@ -1,28 +1,13 @@
 import { isCompositeLo } from "../types/type-utils.ts";
-import type { Lo, Course, Composite, Topic } from "../types/index.ts";
-import {
-  allVideoLos,
-  crumbs,
-  flattenLos,
-  loadIcon,
-  getPanels,
-  getUnits,
-  injectCourseUrl,
-  removeUnknownLos,
-  filterByType,
-} from "../utils/lo-utils.ts";
-import {
-  createCompanions,
-  createWalls,
-  initCalendar,
-  loadPropertyFlags,
-} from "../utils/course-utils.ts";
+import type { Composite, Course, Lo, Topic } from "../types/index.ts";
+import { allVideoLos, crumbs, filterByType, flattenLos, getPanels, getUnits, injectCourseUrl, loadIcon, removeUnknownLos } from "../utils/lo-utils.ts";
+import { createCompanions, createWalls, initCalendar, loadPropertyFlags } from "../utils/course-utils.ts";
 import { convertLoToHtml } from "../utils/markdown-utils.ts";
 
 export function decorateCourseTree(
   course: Course,
   courseId: string = "",
-  courseUrl = ""
+  courseUrl = "",
 ) {
   // define course properties
   course.courseId = courseId;
@@ -72,7 +57,7 @@ export function decorateLoTree(course: Course, lo: Lo) {
     ) {
       lo.breadCrumbs[1].route = lo.breadCrumbs[1].route.replace(
         "topic",
-        "course"
+        "course",
       );
     }
   }
@@ -99,7 +84,7 @@ export function decorateLoTree(course: Course, lo: Lo) {
       // eslint-disable-next-line no-unsafe-optional-chaining
       ...compositeLo?.units?.standardLos,
       // eslint-disable-next-line no-unsafe-optional-chaining
-      ...compositeLo?.units?.sides
+      ...compositeLo?.units?.sides,
     );
 
     for (const childLo of compositeLo.los) {

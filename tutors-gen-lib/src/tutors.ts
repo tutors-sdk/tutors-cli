@@ -1,10 +1,10 @@
-import { buildCourse } from "./generator/course-builder.ts";
+import { buildCourse } from "./services/course-builder.ts";
 import { decorateCourseTree } from "@tutors/tutors-model-lib";
 import type { Course, Lo } from "@tutors/tutors-model-lib";
-import { resourceBuilder } from "./generator/resource-builder.ts";
-import { writeFile } from "./generator/file-utils.ts";
-import { generateNetlifyToml } from "./generator/netlify.ts";
-import { generateLlms } from "./generator/llms.ts";
+import { resourceBuilder } from "./services/resource-builder.ts";
+import { writeFile } from "./utils/file-utils.ts";
+import { generateNetlifyToml } from "./utils/netlify.ts";
+import { generateLlms } from "./utils/llms.ts";
 
 export function parseCourse(folder: string): Course {
   resourceBuilder.buildTree(folder);

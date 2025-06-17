@@ -4,14 +4,7 @@ const frontMatter = frontMatterModule.default || frontMatterModule;
 import * as fs from "node:fs";
 import * as yaml from "js-yaml";
 import { imageTypes, type LearningResource, type VideoIdentifier, type VideoIdentifiers } from "@tutors/tutors-model-lib";
-import {
-  getFileType,
-  getHeaderFromBody,
-  readFirstLineFromFile,
-  readWholeFile,
-  withoutHeaderFromBody,
-} from "./file-utils.ts";
-import { exit } from "node:process";
+import { getFileType, getHeaderFromBody, readFirstLineFromFile, readWholeFile, withoutHeaderFromBody } from "./file-utils.ts";
 
 export function getFileWithName(lr: LearningResource, file: string) {
   let foundFilePath = "";

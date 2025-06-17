@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
 import path from "node:path";
-import { copyFileToFolder, findLastMatchingString, getFileName, getFileType } from "./file-utils.ts";
+import { copyFileToFolder, findLastMatchingString, getFileName, getFileType } from "../utils/file-utils.ts";
 import { assetTypes, type LearningResource, loTypes } from "@tutors/tutors-model-lib";
 
 const loSignatures: string[] = [];

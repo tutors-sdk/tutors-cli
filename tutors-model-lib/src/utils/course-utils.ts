@@ -1,5 +1,5 @@
 // import { themeService } from "$lib/services/themes/services/themes.svelte";
-import type { IconNav, Lo, Composite, Course, Topic, LoType } from "../types/index.ts";
+import type { Composite, Course, IconNav, Lo, LoType, Topic } from "../types/index.ts";
 import { filterByType, setShowHide } from "../utils/lo-utils.ts";
 
 export function createToc(course: Course) {
@@ -13,7 +13,7 @@ export function createToc(course: Course) {
         ...topic.panels.panelNotes,
         ...topic.units.units,
         ...topic.units.standardLos,
-        ...topic.units.sides
+        ...topic.units.sides,
       );
 
       topic.toc.forEach((lo) => {
@@ -96,9 +96,7 @@ export function createCompanions(course: Course) {
 export function createWalls(course: Course) {
   course.walls = [];
   course.wallMap = new Map<string, Lo[]>();
-  ["talk", "note", "lab", "web", "archive", "github"].forEach((type) =>
-    addWall(course, type as LoType)
-  );
+  ["talk", "note", "lab", "web", "archive", "github"].forEach((type) => addWall(course, type as LoType));
   course.wallBar = {
     show: true,
     bar: [],
@@ -129,15 +127,12 @@ function addWall(course: Course, type: LoType) {
 }
 
 export function loadPropertyFlags(course: Course) {
-  course.isPortfolio =
-    (course.properties?.portfolio as unknown as boolean) === true;
+  course.isPortfolio = (course.properties?.portfolio as unknown as boolean) === true;
   course.llm = course.properties.llm as unknown as number;
   course.isPrivate = (course.properties?.private as unknown as number) === 1;
-  course.areVideosHidden =
-    (course.properties?.hideVideos as unknown as boolean) === true;
+  course.areVideosHidden = (course.properties?.hideVideos as unknown as boolean) === true;
   course.footer = course.properties?.footer as unknown as string;
-  course.areLabStepsAutoNumbered =
-    (course.properties?.labStepsAutoNumber as unknown as boolean) === true;
+  course.areLabStepsAutoNumbered = (course.properties?.labStepsAutoNumber as unknown as boolean) === true;
   course.authLevel = course.properties.auth as unknown as number;
   course.defaultPdfReader = "adobe";
   if (course.properties.defaultPdfReader) {
@@ -156,12 +151,12 @@ export function loadPropertyFlags(course: Course) {
 
   course.hasWhiteList = false;
   course.ignorePin = course.properties?.ignorepin?.toString();
-  if (course.properties?.icon && typeof course.properties.icon === 'object') {
+  if (course.properties?.icon && typeof course.properties.icon === "object") {
     const icon = course.properties.icon as { type?: string; color?: string };
     if (icon.type && icon.color) {
       course.icon = {
         type: icon.type,
-        color: icon.color
+        color: icon.color,
       };
     }
   }
@@ -189,7 +184,7 @@ export function initCalendar(course: Course) {
             date,
             title: weekData.title,
             type: weekData.type,
-            dateObj: new Date(date)
+            dateObj: new Date(date),
           };
         });
       }
@@ -198,7 +193,7 @@ export function initCalendar(course: Course) {
       const currentWeek = calendar.weeks.find(
         (week, i) =>
           today > Date.parse(week.date) &&
-          today <= Date.parse(calendar.weeks[i + 1]?.date)
+          today <= Date.parse(calendar.weeks[i + 1]?.date),
       );
       course.courseCalendar = {
         title: calendarObj.title,
