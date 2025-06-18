@@ -1,7 +1,8 @@
 import * as fs from "node:fs";
 import path from "node:path";
 import { copyFileToFolder, findLastMatchingString, getFileName, getFileType } from "../utils/file-utils.ts";
-import { assetTypes, type LearningResource, loTypes } from "@tutors/tutors-model-lib";
+import { assetTypes, loTypes } from "@tutors/tutors-model-lib";
+import type{ LearningResource } from "../types/types.ts";
 
 const loSignatures: string[] = [];
 loTypes.forEach((type) => loSignatures.push(`/${type}`));

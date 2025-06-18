@@ -1,7 +1,8 @@
 import * as fs from "node:fs";
-import * as yaml from "npm:js-yaml@^4.1.0";
-import archiver from "npm:archiver@^5.3.1";
-import * as path from "path";
+import * as path from "node:path";
+import * as yaml from "npm:js-yaml@^4";
+import archiver from "npm:archiver@^7";
+
 import { exit } from "node:process";
 
 export function removeFirstLine(str: string): string {

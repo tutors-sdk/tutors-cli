@@ -3,9 +3,10 @@ import frontMatterModule from "front-matter";
 const frontMatter = frontMatterModule.default || frontMatterModule;
 import * as fs from "node:fs";
 import * as yaml from "js-yaml";
-import { imageTypes, type LearningResource, type VideoIdentifier, type VideoIdentifiers } from "@tutors/tutors-model-lib";
+import { imageTypes, type VideoIdentifier, type VideoIdentifiers } from "@tutors/tutors-model-lib";
 import { getFileType, getHeaderFromBody, readFirstLineFromFile, readWholeFile, withoutHeaderFromBody } from "./file-utils.ts";
 import process from "node:process";
+import type { LearningResource } from "../types/types.ts";
 
 export function getFileWithName(lr: LearningResource, file: string) {
   let foundFilePath = "";

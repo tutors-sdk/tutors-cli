@@ -20,8 +20,9 @@ import {
   readVideoIds,
   removeLeadingHashes,
 } from "../utils/lr-utils.ts";
-import { type Archive, type Composite, type Course, isCompositeLo, type Lab, type LearningResource, type Lo, preOrder, type Talk } from "@tutors/tutors-model-lib";
+import { type Archive, type Composite, type Course, isCompositeLo, type Lab, type Lo, preOrder, type Talk } from "@tutors/tutors-model-lib";
 import { readWholeFile, readYamlFile } from "../utils/file-utils.ts";
+import type { LearningResource } from "../types/types.ts";
 
 function buildTalk(lo: Lo, lr: LearningResource) {
   const talk = lo as Talk;

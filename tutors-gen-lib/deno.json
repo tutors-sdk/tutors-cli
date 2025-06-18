@@ -6,8 +6,6 @@
   "imports": {
     "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0",
     "front-matter": "npm:front-matter@^4.0.2",
-    "fs": "node:fs",
-    "path": "node:path",
     "js-yaml": "npm:js-yaml@^4.1.0",
     "archiver": "npm:archiver@^7.0.1"
   }
