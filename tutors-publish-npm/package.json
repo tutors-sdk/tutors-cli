@@ -1,0 +1,37 @@
+{
+  "name": "tutors-publish",
+  "version": "3.4.7",
+  "description": "Static course web site generator - json emitter",
+  "type": "module",
+  "main": "./dist/tutors-publish.js",
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean & rm -f tsconfig.tsbuildinfo"
+  },
+  "author": "Eamonn de Leastar (edeleastar@setu.ie)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tutors-sdk/tutors.git"
+  },
+  "bin": {
+    "tutors-publish": "./dist/tutors-publish.js"
+  },
+  "dependencies": {
+    "@tutors/tutors-gen-lib": "npm:@jsr/tutors__tutors-gen-lib@^0.0.18"
+  },
+  "jsr": {
+    "dependencies": {
+      "@tutors/tutors-gen-lib": "^3.4.7"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "prettier": "3.5.3",
+    "typescript": "^5.8.3"
+  },
+  "prettier": {
+    "singleQuote": false,
+    "printWidth": 180
+  }
+}
