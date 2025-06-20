@@ -2,7 +2,7 @@
 import * as fs from "fs";
 import { parseCourse, generateCourse } from "@tutors/tutors-gen-lib";
 
-const versionStr = `tutors-publish: 0.0.18`;
+const versionStr = `tutors-publish: 4.0.0`;
 console.log(versionStr);
 
 if (!fs.existsSync("course.md")) {
