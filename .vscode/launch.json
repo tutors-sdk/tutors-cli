@@ -5,8 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "tutors-publish-npm",
+      "program": "${workspaceFolder}/tutors-publish-npm/dist/index.js",
+      "cwd": "/Users/edeleastar/repos/tutor-sdk/docs/tutors-reference-course",
       "request": "launch",
-      "name": "Deno",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "request": "launch",
+      "name": "tutors-publish-deno",
       "type": "node",
       "program": "${workspaceFolder}/tutors-publish/main.ts",
       // "cwd": "${workspaceFolder}",
@@ -25,18 +35,6 @@
         "--allow-run"
       ],
       "attachSimplePort": 9229
-    },
-    {
-      "name": "tutors-publish",
-      "program": "${workspaceFolder}/tutors-publish-npm/dist/tutors-publish.js",
-      "request": "launch",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "node",
-      "cwd": "/Users/edeleastar/repos/tutor-sdk/docs/tutors-reference-course",
-      "console": "integratedTerminal",
-      "preLaunchTask": "npm: build - tutors-publish-npm",
-      "outFiles": ["${workspaceFolder}/tutors-publish-npm/dist/**/*.js"],
-      "sourceMaps": true
     }
   ]
 }
