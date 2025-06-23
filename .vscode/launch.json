@@ -35,6 +35,28 @@
         "--allow-run"
       ],
       "attachSimplePort": 9229
+    },
+    {
+      "request": "launch",
+      "name": "tutors-publish-html",
+      "type": "node",
+      "program": "${workspaceFolder}/tutors-publish-html/main.ts",
+      // "cwd": "${workspaceFolder}",
+      "cwd": "/Users/edeleastar/repos/tutor-sdk/docs/tutors-reference-course",
+      "env": {},
+      "runtimeExecutable": "/Users/edeleastar/.deno/bin/deno",
+      "runtimeArgs": [
+        "run",
+        "--config",
+        "${workspaceFolder}/deno.json",
+        "--inspect-wait",
+        "--allow-read",
+        "--allow-write",
+        "--allow-sys",
+        "--allow-env",
+        "--allow-run"
+      ],
+      "attachSimplePort": 9229
     }
   ]
 }

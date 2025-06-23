@@ -1,5 +1,5 @@
 {
-  "name": "@tutors/tutors-publish",
+  "name": "@tutors/tutors-publish-html",
   "version": "0.0.19",
   "exports": "./main.ts",
   "license": "MIT",
@@ -9,6 +9,8 @@
   },
   "imports": {
     "@tutors/tutors-gen-lib": "jsr:@tutors/tutors-gen-lib@^0",
-    "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0"
+    "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0",
+    "nunjucks": "npm:nunjucks@3.2.4",
+    "shelljs": "npm:shelljs@^0.8.5"
   }
 }

@@ -62,7 +62,7 @@ export function decorateLoTree(course: Course, lo: Lo) {
     }
   }
 
-  // Convert summary and contentMd to html
+  // Convert contentMd to html
   convertLoToHtml(course, lo);
 
   if (isCompositeLo(lo)) {

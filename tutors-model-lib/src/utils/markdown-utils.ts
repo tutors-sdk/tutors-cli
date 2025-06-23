@@ -9,7 +9,7 @@ import mark from "markdown-it-mark";
 import footnote from "markdown-it-footnote";
 import deflist from "markdown-it-deflist";
 import { addCopyButton } from "shiki-transformer-copy-button";
-import type { Course, Lo } from "../types/index.ts";
+import type { Course, Lab, Lo, Note } from "../types/index.ts";
 
 const options = {
   // delay time from "copied" state back to normal state
@@ -97,9 +97,34 @@ export function convertMdToHtml(md: string, codeTheme: string = "ayu-dark"): str
   return markdownIt.render(md);
 }
 
+export function convertLabToHtml(course: Course, lab: Lab) {
+  lab.summary = markdownIt.render(lab.summary);
+  const url = lab.route.replace(`/lab/${course.courseId}`, course.courseUrl);
+  lab.los?.forEach((step) => {
+    if (course.courseUrl) {
+      step.contentMd = filter(step.contentMd, url);
+    }
+    step.contentHtml = markdownIt.render(step.contentMd);
+    step.parentLo = lab;
+    step.type = "step";
+  });
+}
+
+export function convertNoteToHtml(course: Course, note: Note, refreshOnly: boolean = false) {
+  note.summary = convertMdToHtml(note.summary);
+  const url = note.route.replace(`/note/${course.courseId}`, course.courseUrl);
+  if (!refreshOnly) {
+    note.contentMd = filter(note.contentMd, url);
+  }
+  note.contentHtml = convertMdToHtml(note.contentMd);
+}
+
+
 export function convertLoToHtml(course: Course, lo: Lo) {
-  if (lo.type === "lab" || lo.type == "note") {
-    // converted elsewhere
+  if (lo.type === "lab") {
+    convertLabToHtml(course, lo as Lab);
+  }else if (lo.type == "note") {
+    convertNoteToHtml(course, lo as Note);
   } else {
     if (lo.summary) lo.summary = convertMdToHtml(lo.summary);
     let md = lo.contentMd;
