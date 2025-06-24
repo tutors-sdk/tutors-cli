@@ -62,7 +62,6 @@ function emitLo(lo: Lo, path: string) {
 
 function emitComposite(lo: Topic, path: string) {
   shelljs.cd(lo.id);
-  console.log(shelljs.pwd())
   const topicPath = `${path}/${lo.id}`;
   lo?.los?.forEach((lo) => {
     emitLo(lo as Lo, topicPath);
