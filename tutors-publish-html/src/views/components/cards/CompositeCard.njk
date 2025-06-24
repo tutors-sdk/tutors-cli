@@ -2,7 +2,7 @@
 {% from "components/cards/UnitCard.njk" import unitCard %}
 {% from "components/cards/PanelCards.njk" import panelCards %}
 {% from "components/navigators/MainNavigator.njk" import mainNavigator %}
-{% macro topicCard (lo) %}
+{% macro compositeCard (lo) %}
     {% if (lo.units.sides.length > 0) %}
         <div class="block md:flex w-11/12 mx-auto">
             <div class="w-full">

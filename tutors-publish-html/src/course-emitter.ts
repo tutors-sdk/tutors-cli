@@ -40,6 +40,9 @@ function emitLoPage(lo: Lo, path: string) {
   if (lo.type == "note" || lo.type == "panelnote") {
     emitNote(lo as Lo, path);
   }
+  if (lo.type == "topic") {
+    emitComposite(lo as Topic, `${path}`);
+  }
 }
 
 function emitUnit(lo: Unit, path: string) {
@@ -57,13 +60,14 @@ function emitLo(lo: Lo, path: string) {
   }
 }
 
-function emitTopic(lo: Topic, path: string) {
+function emitComposite(lo: Topic, path: string) {
   shelljs.cd(lo.id);
+  console.log(shelljs.pwd())
   const topicPath = `${path}/${lo.id}`;
   lo?.los?.forEach((lo) => {
     emitLo(lo as Lo, topicPath);
   });
-  publishTemplate(topicPath, "index.html", "Topic.njk", lo);
+  publishTemplate(topicPath, "index.html", "Composite.njk", lo);
   shelljs.cd("..");
 }
 
@@ -81,7 +85,7 @@ export function emitWalls(path: string, lo: Course) {
 export function emitCourse(path: string, lo: Course) {
   shelljs.cd(path);
   lo?.los?.forEach((lo) => {
-    emitTopic(lo as Topic, path);
+    emitComposite(lo as Topic, path);
   });
   publishTemplate(path, "index.html", "Course.njk", lo);
   emitWalls(path, lo);

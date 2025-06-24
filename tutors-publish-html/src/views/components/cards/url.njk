@@ -7,16 +7,22 @@
     {% set url = path + '/' +lo.id + "/" + lo.archiveFile %}
   {% else %}
     {% if (lo.type == "topic") %}
-      {% set url = './' +lo.id + "/index.html" %}
+      {% if lo.parentLo.type == "unit" or lo.parentLo.type == "side" %}
+        {% set url = './' + lo.parentLo.id + '/' +lo.id + "/index.html" %}
+      {% else %}
+       {% set url = './' +lo.id + "/index.html" %}
+    {% endif %}
     {% else %}
       {% set url = path + '/' +lo.id + "/index.html" %}
     {% endif %}
   {% endif %}
   <a href={{ url }}>
-  {% endmacro %}
-  {% macro urlEnd(lo) %}
+{% endmacro %}
+
+{% macro urlEnd(lo) %}
   </a>
 {% endmacro %}
+
 {% macro crumbUrlStart (index, lo) %}
   {% if lo.type == "lab" or index ==  0 %}
     {% set url = "./index.html" %}
