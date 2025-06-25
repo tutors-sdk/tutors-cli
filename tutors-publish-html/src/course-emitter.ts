@@ -1,58 +1,6 @@
 import shelljs from "npm:shelljs@^0";
-import * as fs from "node:fs";
-
-import * as nunjucks from "npm:nunjucks@3";
-import type { Archive, Course, Lab, Lo, Talk, Topic, Unit } from "@tutors/tutors-model-lib";
-
-const root = new URL('.', import.meta.url).pathname;
-nunjucks.configure(root + "/views", { autoescape: false });
-nunjucks.installJinjaCompat();
-
-function writeFile(
-  folder: string,
-  filename: string,
-  contents: string,
-): void {
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder, { recursive: true });
-  }
-  return fs.writeFileSync(folder + "/" + filename, contents);
-}
-
-function fixWallLos(los: Lo[]): void {
-  los.forEach((lo) => {
-    if (lo.type !== "web" && lo.type !== "github") {
-      if (lo.type == "archive") {
-        lo.route = lo.route.substring(lo.route.indexOf('///') + 3);
-      } else {
-        lo.route = lo.route.substring(lo.route.indexOf('//') + 2);
-      }
-    } else {
-      lo.route+= ' target="_blank"';
-    }
-    if (lo.img) {
-      lo.img = lo.img.substring(lo.img.indexOf('///') + 3);
-    }
-    switch (lo.type) {  
-      case "talk": {
-        const talk = lo as Talk;
-        talk.route = `${talk.route}/${talk.pdfFile} target="_blank"`; 
-        break;
-      }
-      case "lab":
-      case "note": {
-        lo.route += `/index.html`; 
-        break;
-      }
-  
-    default: break;  
-  }
-  });
-}
-
-function publishTemplate(path: string, file: string, template: string, lo: Lo): void {
-  writeFile(path, file, nunjucks.render(template, { lo: lo }));
-}
+import type { Course, Lo, Topic, Unit } from "@tutors/tutors-model-lib";
+import { fixWallRoutes, publishTemplate } from "./utils.ts";
 
 function emitNote(lo: Lo, path: string) {
   const notePath = `${path}/${lo.id}`;
@@ -108,7 +56,7 @@ export function emitWalls(path: string, lo: Course) {
     if (lo.properties) {
       lo.properties["credits"] = `All ${type}'s in course`;
     }
-    fixWallLos(lo.los);
+    fixWallRoutes(lo.los);
     publishTemplate(path, `${type}.html`, "Wall.njk", lo);
   });
 }
