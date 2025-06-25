@@ -1,25 +1,4 @@
 import type { Lo, Talk } from "@tutors/tutors-model-lib";
-import * as fs from "node:fs";
-import * as nunjucks from "npm:nunjucks@3";
-
-const root = new URL('.', import.meta.url).pathname;
-nunjucks.configure(root + "/views", { autoescape: false });
-nunjucks.installJinjaCompat();
-
-function writeFile(
-    folder: string,
-    filename: string,
-    contents: string,
-  ): void {
-    if (!fs.existsSync(folder)) {
-      fs.mkdirSync(folder, { recursive: true });
-    }
-    return fs.writeFileSync(folder + "/" + filename, contents);
-  }
-
-export function publishTemplate(path: string, file: string, template: string, lo: Lo): void {
-  writeFile(path, file, nunjucks.render(template, { lo: lo }));
-}
 
 export function fixWallRoutes(los: Lo[]): void {
   los.forEach((lo) => {

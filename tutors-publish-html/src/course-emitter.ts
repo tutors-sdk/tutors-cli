@@ -1,15 +1,16 @@
 import shelljs from "npm:shelljs@^0";
 import type { Course, Lo, Topic, Unit } from "@tutors/tutors-model-lib";
-import { fixWallRoutes, publishTemplate } from "./utils.ts";
+import { fixWallRoutes } from "./utils.ts";
+import { publishTemplate, setEngine } from "./template-engine.ts";
 
 function emitNote(lo: Lo, path: string) {
   const notePath = `${path}/${lo.id}`;
-  publishTemplate(notePath, "index.html", "Note.njk", lo);
+  publishTemplate(notePath, "index.html", "Note", lo);
 }
 
 function emitLab(lo: Lo, path: string) {
   const labPath = `${path}/${lo.id}`;
-  publishTemplate(labPath, "index.html", "Lab.njk", lo);
+  publishTemplate(labPath, "index.html", "Lab", lo);
 }
 
 function emitLoPage(lo: Lo, path: string) {
@@ -45,7 +46,7 @@ function emitComposite(lo: Topic, path: string) {
   lo?.los?.forEach((lo) => {
     emitLo(lo as Lo, topicPath);
   });
-  publishTemplate(topicPath, "index.html", "Composite.njk", lo);
+  publishTemplate(topicPath, "index.html", "Composite", lo);
   shelljs.cd("..");
 }
 
@@ -57,15 +58,16 @@ export function emitWalls(path: string, lo: Course) {
       lo.properties["credits"] = `All ${type}'s in course`;
     }
     fixWallRoutes(lo.los);
-    publishTemplate(path, `${type}.html`, "Wall.njk", lo);
+    publishTemplate(path, `${type}.html`, "Wall", lo);
   });
 }
 
 export function emitCourse(path: string, lo: Course) {
+  setEngine("nunchucks");
   shelljs.cd(path);
   lo?.los?.forEach((lo) => {
     emitComposite(lo as Topic, path);
   });
-  publishTemplate(path, "index.html", "Course.njk", lo);
+  publishTemplate(path, "index.html", "Course", lo);
   emitWalls(path, lo);
 }
