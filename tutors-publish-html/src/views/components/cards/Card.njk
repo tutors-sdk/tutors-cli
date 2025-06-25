@@ -3,15 +3,16 @@
 {% from "components/cards/url.njk" import urlStart, urlEnd %}
 {% from "components/iconography/Icon.njk" import icon %}
 {% from "components/iconography/styles.njk" import icons, iconColours %}
-{% macro card (lo, path) %}
+
+{% macro card (lo, path, pathoverride="", imageoverride="") %}
   <div class="{{ tutorscard }} border-[{{ iconColours[lo.type] }}]">
-    {{ urlStart(lo, path) }}
+    {{ urlStart(lo, path, pathoverride) }}
     <div class="{{ tutorscardheader }}">
       <h3 class="card-title text-md font-normal">{{ lo.title }}</h3>
       {{ icon(lo.type, 20, "", "") }}
     </div>
     <figure class="flex justify-center">
-      {{ image (lo, path) }}
+      {{ image (lo, path, imageoverride) }}
     </figure>
     <div class="card-body">
       <div class="tutorscard-body">

@@ -18,6 +18,7 @@ if (!fs.existsSync("course.md")) {
   const lo = parseCourse(srcFolder);
   generateCourse(lo, destFolder);
   decorateCourseTree(lo);
+  
   emitCourse(destFolder, lo);
 }
 console.log(versionStr);

@@ -1,22 +1,26 @@
-{% macro urlStart (lo, path) %}
-  {% if (lo.type == "web") or ((lo.type == "github") ) %}
-    {% set url = lo.route + ' target="_blank"' %}
-  {% elif (lo.type == "talk") %}
-    {% set url = path + '/' + lo.id + '/' + lo.pdfFile + ' target="_blank"' %}
-  {% elif (lo.type == "archive") %}
-    {% set url = path + '/' +lo.id + "/" + lo.archiveFile %}
+{% macro urlStart (lo, path, pathoverride) %}
+  {% if pathoverride !== "" %}
+    {% set url = pathoverride  %}
   {% else %}
-    {% if (lo.type == "topic") %}
-      {% if lo.parentLo.type == "unit" or lo.parentLo.type == "side" %}
-        {% set url = './' + lo.parentLo.id + '/' +lo.id + "/index.html" %}
-      {% else %}
-       {% set url = './' +lo.id + "/index.html" %}
-    {% endif %}
+    {% if (lo.type == "web") or ((lo.type == "github") ) %}
+      {% set url = lo.route + ' target="_blank"' %}
+    {% elif (lo.type == "talk") %}
+      {% set url = path + '/' + lo.id + '/' + lo.pdfFile + ' target="_blank"' %}
+    {% elif (lo.type == "archive") %}
+      {% set url = path + '/' +lo.id + "/" + lo.archiveFile %}
     {% else %}
-      {% set url = path + '/' +lo.id + "/index.html" %}
+      {% if (lo.type == "topic") %}
+        {% if lo.parentLo.type == "unit" or lo.parentLo.type == "side" %}
+          {% set url = './' + lo.parentLo.id + '/' +lo.id + "/index.html" %}
+        {% else %}
+        {% set url = './' +lo.id + "/index.html" %}
+      {% endif %}
+      {% else %}
+        {% set url = path + '/' +lo.id + "/index.html" %}
+      {% endif %}
     {% endif %}
   {% endif %}
-  <a href={{ url }}>
+      <a href={{ url }}>
 {% endmacro %}
 
 {% macro urlEnd(lo) %}
