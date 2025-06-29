@@ -18,7 +18,7 @@ export function fixWallRoutes(los: Lo[]): void {
       case "talk": {
         lo.route = lo.route.substring(lo.route.indexOf('//') + 2);
         const talk = lo as Talk;
-        talk.route = `${talk.route}/${talk.pdfFile} target="_blank"`;
+        talk.route = `${talk.route}/index.html`;
         break;
       }
       case "lab":
