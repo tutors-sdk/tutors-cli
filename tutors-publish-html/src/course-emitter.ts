@@ -1,7 +1,7 @@
 import shelljs from "npm:shelljs@^0";
 import type { Course, Lo, Talk, Topic, Unit } from "@tutors/tutors-model-lib";
 import { fixWallRoutes } from "./utils.ts";
-import { publishTemplate, setEngine } from "./template-engine.ts";
+import { publishTemplate } from "./template-engine.ts";
 
 function emitTalk(lo: Talk, path: string) {
   const talkPath = `${path}/${lo.id}`;
@@ -72,8 +72,6 @@ export function emitWalls(path: string, lo: Course) {
 }
 
 export function emitCourse(path: string, lo: Course) {
-  setEngine("vento");
- //  setEngine("nunchucks");
   shelljs.cd(path);
   lo?.los?.forEach((lo) => {
     emitComposite(lo as Topic, path);
