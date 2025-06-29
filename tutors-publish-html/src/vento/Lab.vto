@@ -1,0 +1,51 @@
+{{ import { mainNavigator } from "/components/navigators/MainNavigator.vto" }}
+
+{{ layout "layouts/main.vto" }}
+  {{ mainNavigator(lo) }}
+  <div class="flex m-2">
+    <div class="w-1/4 bg-base-100 rounded-xl shadow-lg">
+      <ul class="menu menu-compact">
+        {{ for chapter of lo.los }}
+          <a id="menu-{{ chapter.shortTitle }}" class="p-4 py-3 text-base" href="javascript:showtab('{{ chapter.shortTitle }}')">
+            {{ chapter.title }}
+          </a>
+        {{ /for }}
+      </ul>
+    </div>
+    <div class="w-3/4 ml-2">
+      <article id="tab-container" class="prose w-full max-w-none break-words p-4 bg-base-100 rounded-xl shadow-lg"></article>
+    </div>
+  </div>
+  {{ for chapter of lo.los }}
+    <div id="{{ chapter.shortTitle }}" style="visibility:hidden">
+      {{ chapter.contentHtml }}
+    </div>
+  {{ /for }}
+  <script>
+    function resettabs() {
+      let menuItem;
+      {{ for chapter of lo.los }}
+        menuItem = document.getElementById('menu-{{ chapter.shortTitle }}');
+        menuItem.className = "p-4 py-3 text-base";
+      {{ /for }}
+    }
+
+    function showtab(tabs) {
+      resettabs();
+      let menuItem;
+      var tab = tabs;
+      switch (tab) {
+        {{ for chapter of lo.los }}
+          case "{{ chapter.shortTitle }}":
+            menuItem = document.getElementById('menu-{{ chapter.shortTitle }}');
+            menuItem.className = "p-4 py-3 text-xl font-bold bordered";
+            document.getElementById('tab-container').innerHTML = document.getElementById("{{ chapter.shortTitle }}").innerHTML;
+            break;
+        {{ /for }}
+        default:
+          document.getElementById('tab-container').innerHTML = document.getElementById("00").innerHTML;
+          break;
+      }
+    }
+  </script>
+{{ /layout }}

@@ -58,12 +58,14 @@ export function emitWalls(path: string, lo: Course) {
       lo.properties["credits"] = `All ${type}'s in course`;
     }
     fixWallRoutes(lo.los);
-    publishTemplate(path, `${type}.html`, "Wall", lo);
+    const wall = {course: lo, los:los};
+    publishTemplate(path, `${type}.html`, "Wall", wall);
   });
 }
 
 export function emitCourse(path: string, lo: Course) {
-  setEngine("nunchucks");
+  setEngine("vento");
+ //  setEngine("nunchucks");
   shelljs.cd(path);
   lo?.los?.forEach((lo) => {
     emitComposite(lo as Topic, path);

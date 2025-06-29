@@ -1,0 +1,50 @@
+{{ export function crumbUrlStart (index, lo) }}
+  {{ if lo.type == "lab" || index ==  0 }}
+    {{ set url = "./index.html" }}
+  {{ else if lo.type == "unit" || lo.type == "side" }}
+    {{ set url = "../../index.html" }}
+  {{ else if index == 1 }}
+    {{ set url = "../index.html" }}
+  {{ else if index == 2 }}
+    {{ set url = "../../index.html" }}
+  {{ else if index == 3 }}
+    {{ set url = "../../../index.html" }}
+  {{ else if index == 4 }}
+    {{ set url = "../../../../index.html" }}
+  {{ /if }}
+    <a href={{ url }}>
+{{ /export }}
+  
+{{ export function crumbUrlEnd(lo) }}
+  </a>
+{{ /export }}
+
+{{ export function urlStart(lo, path, pathoverride = "") }}
+  {{ set url = "" }}
+  {{ if pathoverride !== "" }}
+    {{ set url = pathoverride }}
+  {{ else }}
+    {{ if (lo.type === "web") || (lo.type === "github") }}
+      {{ set url = lo.route + ' target="_blank"' }}
+    {{ else if lo.type === "talk" }}
+      {{ set url = path + '/' + lo.id + '/' + lo.pdfFile + ' target="_blank"' }}
+    {{ else if lo.type === "archive" }}
+      {{ set url = path + '/' + lo.id + "/" + lo.archiveFile }}
+    {{ else }}
+      {{ if lo.type === "topic" }}
+        {{ if lo.parentLo.type === "unit" || lo.parentLo.type === "side" }}
+          {{ set url = './' + lo.parentLo.id + '/' + lo.id + "/index.html" }}
+        {{ else }}
+          {{ set url = './' + lo.id + "/index.html" }}
+        {{ /if }}
+      {{ else }}
+        {{ set url = path + '/' + lo.id + "/index.html" }}
+      {{ /if }}
+    {{ /if }}
+  {{ /if }}
+  <a href={{ url }}>
+{{ /export }}
+
+{{ export function urlEnd(lo) }}
+  </a>
+{{ /export }}
