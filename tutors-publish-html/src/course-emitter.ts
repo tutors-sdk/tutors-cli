@@ -1,7 +1,12 @@
 import shelljs from "npm:shelljs@^0";
-import type { Course, Lo, Topic, Unit } from "@tutors/tutors-model-lib";
+import type { Course, Lo, Talk, Topic, Unit } from "@tutors/tutors-model-lib";
 import { fixWallRoutes } from "./utils.ts";
 import { publishTemplate, setEngine } from "./template-engine.ts";
+
+function emitTalk(lo: Talk, path: string) {
+  const talkPath = `${path}/${lo.id}`;
+  publishTemplate(talkPath, "index.html", "Talk", lo);
+}
 
 function emitNote(lo: Lo, path: string) {
   const notePath = `${path}/${lo.id}`;
@@ -22,6 +27,9 @@ function emitLoPage(lo: Lo, path: string) {
   }
   if (lo.type == "topic") {
     emitComposite(lo as Topic, `${path}`);
+  }
+  if (lo.type == "talk") {
+    emitTalk(lo as Talk, `${path}`);
   }
 }
 
