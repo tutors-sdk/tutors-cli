@@ -70,6 +70,6 @@ export function emitCourse(path: string, lo: Course) {
   lo?.los?.forEach((lo) => {
     emitComposite(lo as Topic, path);
   });
-  publishTemplate(path, "index.html", "Course", lo);
+  publishTemplate(path, "home.html", "Course", lo);
   emitWalls(path, lo);
 }

@@ -1,18 +1,16 @@
 {{ import { icon } from "/components/iconography/Icon.vto"}}
 
 {{ export function walls(lo) }}
-  {{ if lo.type === "course" }}
+  {{ set depth = lo.type === "course" ? 0 : lo.type === "topic" ? 1 : lo.parentLo?.type === "topic" ? 2 : 3 }}
+  {{ set url = "../".repeat(depth) }}
+  {{ if depth === 0 }}
     {{ set url = "./" }}
-  {{ else if lo.type === "topic" }}
-    {{ set url = "../" }}
-  {{ else if lo.parentLo.type === "topic" }}
-    {{ set url = "../../" }}
-  {{ else }}
-    {{ set url = "../../../" }}
   {{ /if }}
+  
   <div class="p-3 flex-wrap lg:flex-none shadow-lg bg-[rgb(225,239,240)] text-neutral-content rounded-box nav-corner horizontal ml-2">
     {{ for wall of lo.parentCourse.walls }}
-      {{ icon(wall[0].type, 20, url + wall[0].type + ".html", "All " + wall[0].type + "'s in module") }}
+      {{ set type = wall[0].type }}
+      {{ icon(type, 20, url + type + ".html", "All " + type + "'s in module") }}
     {{ /for }}
   </div>
 {{ /export }}

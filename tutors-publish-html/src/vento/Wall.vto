@@ -2,7 +2,7 @@
 {{ import { card } from "/components/cards/Card.vto" }}
 
 {{ layout "layouts/main.vto" }}
-  {{ mainNavigator(lo.course) }}
+  {{ mainNavigator(lo.course, true) }}
   <div class="bg-base-100 rounded-xl shadow-lg">
     <div class="flex flex-wrap justify-center">
       {{ for item of lo.los }}

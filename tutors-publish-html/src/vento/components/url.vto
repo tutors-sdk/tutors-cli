@@ -1,15 +1,13 @@
 {{ export function crumbUrlStart (index, lo) }}
-  {{ if lo.type == "lab" || index == 0 }}
-    {{ set url = "./index.html" }}
-  {{ else if lo.type == "unit" || lo.type == "side" }}
-    {{ set url = "../../index.html" }}
+  {{ set page = lo.type === "course" ? "home" : "index" }}
+  {{ if lo.type === "unit" || lo.type === "side" }}
+    {{ set url = `../../${page}.html` }}
   {{ else }}
-    {{ set depth = index }}
-    {{ set url = "../".repeat(depth) + "index.html" }}
+    {{ set url = "../".repeat(index) + `${page}.html` }}
   {{ /if }}
   <a href={{ url }}>
 {{ /export }}
-  
+
 {{ export function crumbUrlEnd(lo) }}
   </a>
 {{ /export }}
