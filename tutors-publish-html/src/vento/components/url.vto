@@ -1,18 +1,13 @@
 {{ export function crumbUrlStart (index, lo) }}
-  {{ if lo.type == "lab" || index ==  0 }}
+  {{ if lo.type == "lab" || index == 0 }}
     {{ set url = "./index.html" }}
   {{ else if lo.type == "unit" || lo.type == "side" }}
     {{ set url = "../../index.html" }}
-  {{ else if index == 1 }}
-    {{ set url = "../index.html" }}
-  {{ else if index == 2 }}
-    {{ set url = "../../index.html" }}
-  {{ else if index == 3 }}
-    {{ set url = "../../../index.html" }}
-  {{ else if index == 4 }}
-    {{ set url = "../../../../index.html" }}
+  {{ else }}
+    {{ set depth = index }}
+    {{ set url = "../".repeat(depth) + "index.html" }}
   {{ /if }}
-    <a href={{ url }}>
+  <a href={{ url }}>
 {{ /export }}
   
 {{ export function crumbUrlEnd(lo) }}
