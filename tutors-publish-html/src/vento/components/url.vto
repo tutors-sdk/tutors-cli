@@ -20,31 +20,16 @@
 {{ /export }}
 
 {{ export function urlStart(lo, path, pathoverride = "") }}
-  {{ set url = "" }}
   {{ if pathoverride !== "" }}
     {{ set url = pathoverride }}
+  {{ else if (lo.type === "web") || (lo.type === "github") }}
+    {{ set url = lo.route + ' target="_blank"' }}
+  {{ else if lo.type === "archive" }}
+    {{ set url = path + '/' + lo.id + "/" + lo.archiveFile }}
   {{ else }}
-    {{ if (lo.type === "web") || (lo.type === "github") }}
-      {{ set url = lo.route + ' target="_blank"' }}
-    {{ else if lo.type === "talk" }}
-      {{ if lo.parentLo.type === "unit" || lo.parentLo.type === "side" }}
-        {{ set url = './' + lo.parentLo.id + '/' + lo.id + "/index.html" }}
-      {{ else }}
-        {{ set url = './' + lo.id + "/index.html" }}
-      {{ /if }}
-    {{ else if lo.type === "archive" }}
-      {{ set url = path + '/' + lo.id + "/" + lo.archiveFile }}
-    {{ else }}
-      {{ if lo.type === "topic" }}
-        {{ if lo.parentLo.type === "unit" || lo.parentLo.type === "side" }}
-          {{ set url = './' + lo.parentLo.id + '/' + lo.id + "/index.html" }}
-        {{ else }}
-          {{ set url = './' + lo.id + "/index.html" }}
-        {{ /if }}
-      {{ else }}
-        {{ set url = path + '/' + lo.id + "/index.html" }}
-      {{ /if }}
-    {{ /if }}
+    {{ set hasParentUnit = lo.parentLo && (lo.parentLo.type === "unit" || lo.parentLo.type === "side") }}
+    {{ set prefix = hasParentUnit ? './' + lo.parentLo.id + '/' : './' }}
+    {{ set url = prefix + lo.id + "/index.html" }}
   {{ /if }}
   <a href={{ url }}>
 {{ /export }}
