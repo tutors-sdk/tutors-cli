@@ -1,11 +1,12 @@
 {{ import { icon } from "/components/iconography/Icon.vto"}}
 
 {{ export function walls(lo) }}
-  {{ set url = "" }}
   {{ if lo.type === "course" }}
     {{ set url = "./" }}
   {{ else if lo.type === "topic" }}
     {{ set url = "../" }}
+  {{ else if lo.parentLo.type === "topic" }}
+    {{ set url = "../../" }}
   {{ else }}
     {{ set url = "../../../" }}
   {{ /if }}

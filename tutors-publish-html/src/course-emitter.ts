@@ -60,14 +60,8 @@ function emitComposite(lo: Topic, path: string) {
 
 export function emitWalls(path: string, lo: Course) {
   lo.walls?.forEach((los) => {
-    const type = los[0].type;
-    lo.los = los;
-    if (lo.properties) {
-      lo.properties["credits"] = `All ${type}'s in course`;
-    }
-    fixWallRoutes(lo.los);
-    const wall = {course: lo, los:los};
-    publishTemplate(path, `${type}.html`, "Wall", wall);
+    fixWallRoutes(los);
+    publishTemplate(path, `${los[0].type}.html`, "Wall", {course: lo, los:los});
   });
 }
 

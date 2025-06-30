@@ -1,5 +1,4 @@
 import * as fs from "node:fs";
-import type { Lo } from "@tutors/tutors-model-lib";
 import vento from "https://deno.land/x/vento@v1.13.0/mod.ts";
 import { getIconColour, getIconType } from "./vento/components/iconography/styles.ts";
 import autoTrim from "https://deno.land/x/vento@v1.13.0/plugins/auto_trim.ts";
@@ -13,7 +12,7 @@ const env = vento({
 });
 env.use(autoTrim());
 env.filters.iconType = getIconType;
-env.filters.iconColour = getIconColour;;
+env.filters.iconColour = getIconColour;
 
 function writeFile(
     folder: string,
@@ -26,7 +25,7 @@ function writeFile(
     return fs.writeFileSync(folder + "/" + filename, contents);
   }
 
-export async function publishTemplate(path: string, file: string, template: string, lo: Lo) {
+export async function publishTemplate(path: string, file: string, template: string, lo: any) {
   const result = await env.run(`${template}.vto`, { lo: lo });
   writeFile(path, file, result.content);
 }

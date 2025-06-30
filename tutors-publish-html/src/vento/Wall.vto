@@ -6,7 +6,6 @@
   <div class="bg-base-100 rounded-xl shadow-lg">
     <div class="flex flex-wrap justify-center">
       {{ for item of lo.los }}
-        {{ set path = "" }}
         {{ if item.parentLo.type === "unit" || item.parentLo.type === "side" }}
           {{ set path = item.parentLo.parentLo.id + "/" + item.parentLo.id }}
         {{ else }}
