@@ -27,8 +27,11 @@
     {{ if (lo.type === "web") || (lo.type === "github") }}
       {{ set url = lo.route + ' target="_blank"' }}
     {{ else if lo.type === "talk" }}
-      {{ set url = './' + lo.parentLo.id + '/' + lo.id + "/index.html" }}
-      {{# {{ set url = path + '/' + lo.id + '/' + lo.pdfFile + ' target="_blank"' }} #}}
+      {{ if lo.parentLo.type === "unit" || lo.parentLo.type === "side" }}
+        {{ set url = './' + lo.parentLo.id + '/' + lo.id + "/index.html" }}
+      {{ else }}
+        {{ set url = './' + lo.id + "/index.html" }}
+      {{ /if }}
     {{ else if lo.type === "archive" }}
       {{ set url = path + '/' + lo.id + "/" + lo.archiveFile }}
     {{ else }}

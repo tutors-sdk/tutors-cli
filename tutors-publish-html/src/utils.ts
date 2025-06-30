@@ -2,9 +2,6 @@ import type { Lo, Talk } from "@tutors/tutors-model-lib";
 
 export function fixWallRoutes(los: Lo[]): void {
   los.forEach((lo) => {
-    if (lo.img) {
-      lo.img = lo.img.substring(lo.img.indexOf('///') + 3);
-    }
     switch (lo.type) {
       case "web":
       case "github": {

@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import type { Lo } from "@tutors/tutors-model-lib";
 import vento from "https://deno.land/x/vento@v1.13.0/mod.ts";
 import { getIconColour, getIconType } from "./vento/components/iconography/styles.ts";
+import autoTrim from "https://deno.land/x/vento@v1.13.0/plugins/auto_trim.ts";
 
 const root = new URL('.', import.meta.url).pathname;
 const env = vento({
@@ -10,8 +11,9 @@ const env = vento({
   includes: root + "vento",
   autoescape: false,
 });
+env.use(autoTrim());
 env.filters.iconType = getIconType;
-env.filters.iconColour = getIconColour;
+env.filters.iconColour = getIconColour;;
 
 function writeFile(
     folder: string,
