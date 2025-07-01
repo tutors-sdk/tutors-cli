@@ -7,7 +7,7 @@ import * as fs from "node:fs";
 import process from "node:process";
 import { emitCourse } from "./src/course-emitter.ts";
 
-const versionStr = `tutors-publish-html: 4.0.15`;
+const versionStr = `tutors-publish-html: 4.0.22`;
 
 
 if (!fs.existsSync("course.md")) {

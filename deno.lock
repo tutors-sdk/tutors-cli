@@ -87,6 +87,7 @@
         "jsr:@davidbonnet/astring",
         "jsr:@std/html",
         "jsr:@std/path",
+        "npm:@types/estree",
         "npm:estree-walker",
         "npm:meriyah"
       ]
