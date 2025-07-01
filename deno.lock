@@ -7,6 +7,7 @@
     "jsr:@tutors/tutors-gen-lib@0": "0.0.1",
     "jsr:@tutors/tutors-gen-lib@^0.0.1": "0.0.1",
     "jsr:@tutors/tutors-model-lib@0": "0.0.15",
+    "jsr:@vento/vento@^1.14.0": "1.14.0",
     "npm:@iktakahiro/markdown-it-katex@^4.0.1": "4.0.1",
     "npm:@types/estree@1.0.6": "1.0.6",
     "npm:@types/node@*": "22.15.15",
@@ -78,6 +79,16 @@
         "npm:markdown-it-sup",
         "npm:markdown-it-table-of-contents",
         "npm:shiki-transformer-copy-button"
+      ]
+    },
+    "@vento/vento@1.14.0": {
+      "integrity": "59000a01671ace997f37ece4fafaba5c7b1f3e0db92d048dfd996fdbc09fb431",
+      "dependencies": [
+        "jsr:@davidbonnet/astring",
+        "jsr:@std/html",
+        "jsr:@std/path",
+        "npm:estree-walker",
+        "npm:meriyah"
       ]
     }
   },
@@ -1110,6 +1121,7 @@
         "dependencies": [
           "jsr:@tutors/tutors-gen-lib@0",
           "jsr:@tutors/tutors-model-lib@0",
+          "jsr:@vento/vento@^1.14.0",
           "npm:nunjucks@3.2.4",
           "npm:shelljs@~0.8.5"
         ]

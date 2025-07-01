@@ -1,6 +1,6 @@
 {
   "name": "@tutors/tutors-publish-html",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "exports": "./main.ts",
   "license": "MIT",
   "tasks": {
@@ -10,6 +10,7 @@
   "imports": {
     "@tutors/tutors-gen-lib": "jsr:@tutors/tutors-gen-lib@^0",
     "@tutors/tutors-model-lib": "jsr:@tutors/tutors-model-lib@^0",
+    "@vento/vento": "jsr:@vento/vento@^1.14.0",
     "nunjucks": "npm:nunjucks@3.2.4",
     "shelljs": "npm:shelljs@^0.8.5"
   }
