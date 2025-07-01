@@ -1,5 +1,5 @@
 import shelljs from "npm:shelljs@^0";
-import type { Course, Lo, Talk, Topic, Unit } from "@tutors/tutors-model-lib";
+import type { Course, Lab, Lo, Talk, Topic, Unit } from "@tutors/tutors-model-lib";
 import { fixWallRoutes } from "./utils.ts";
 import { publishTemplate } from "./template-engine.ts";
 
@@ -13,14 +13,22 @@ function emitNote(lo: Lo, path: string) {
   publishTemplate(notePath, "index.html", "Note", lo);
 }
 
-function emitLab(lo: Lo, path: string) {
+function emitLab(lo: Lab, path: string) {
   const labPath = `${path}/${lo.id}`;
-  publishTemplate(labPath, "index.html", "Lab", lo);
+  lo.los.forEach((step, index) => {
+    const nextStep = index < lo.los.length - 1 ? lo.los[index + 1] : null;
+    const prevStep = index > 0 ? lo.los[index - 1] : null;
+    if (index === 0) {
+      publishTemplate(labPath, "index.html", "Lab", {lab:lo, labStep:step, nextStep:nextStep, prevStep:prevStep});
+    } else {
+      publishTemplate(labPath, `${step.shortTitle}.html`, "Lab", {lab:lo, labStep:step, nextStep:nextStep, prevStep:prevStep});
+    }
+  });
 }
 
 function emitLoPage(lo: Lo, path: string) {
   if (lo.type == "lab") {
-    emitLab(lo as Lo, path);
+    emitLab(lo as Lab, path);
   }
   if (lo.type == "note" || lo.type == "panelnote") {
     emitNote(lo as Lo, path);
