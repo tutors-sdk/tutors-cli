@@ -2,11 +2,11 @@ import * as fs from "node:fs";
 import { getIconColour, getIconType } from "./vento/components/iconography/styles.ts";
 import vento from "@vento/vento";
 
-const templateRoot = new URL('./vento/', import.meta.url).pathname;
+const templateRoot = new URL('./vento/', import.meta.url);
 const env = vento({
   dataVarname: "it",
   autoDataVarname: true,
-  includes: templateRoot,
+  includes: templateRoot.pathname,
   autoescape: false
 });
 env.filters.iconType = getIconType;

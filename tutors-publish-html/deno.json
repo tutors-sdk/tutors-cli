@@ -1,6 +1,6 @@
 {
   "name": "@tutors/tutors-publish-html",
-  "version": "0.0.26",
+  "version": "0.0.28",
   "exports": "./main.ts",
   "license": "MIT",
   "tasks": {
@@ -18,5 +18,13 @@
     "main.ts",
     "src/**/*.ts",
     "src/**/*.vto"
-  ]
+  ],
+  "package": {
+    "files": [
+      "main.ts",
+      "src/**/*.ts",
+      "src/**/*.vto",
+      "src/vento/**/*"
+    ]
+  }
 }
