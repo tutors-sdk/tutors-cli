@@ -13,5 +13,10 @@
     "@vento/vento": "jsr:@vento/vento@^1.14.0",
     "nunjucks": "npm:nunjucks@3.2.4",
     "shelljs": "npm:shelljs@^0.8.5"
-  }
+  },
+  "include": [
+    "main.ts",
+    "src/**/*.ts",
+    "src/**/*.vto"
+  ]
 }
