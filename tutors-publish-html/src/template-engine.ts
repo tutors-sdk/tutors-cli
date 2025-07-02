@@ -1,17 +1,17 @@
 import * as fs from "node:fs";
-import * as path from "node:path";
 import { getIconColour, getIconType } from "./vento/components/iconography/styles.ts";
 import vento from "@vento/vento";
 
 // Resolve template directory relative to this file
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const templatePath = path.join(__dirname, 'vento');
+const templateRoot = new URL('./vento/', import.meta.url).pathname;
+
 const env = vento({
   dataVarname: "it",
   autoDataVarname: true,
-  includes: templatePath,
+  includes: templateRoot,
   autoescape: false
 });
+console.log(templateRoot)
 env.filters.iconType = getIconType;
 env.filters.iconColour = getIconColour;
 
