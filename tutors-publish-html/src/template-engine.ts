@@ -3,10 +3,11 @@ import { getIconColour, getIconType } from "./vento/components/iconography/style
 import vento from "@vento/vento";
 
 const templateRoot = new URL('./vento/', import.meta.url);
+const templatePath = templateRoot.protocol === 'file:' ? templateRoot.pathname : './src/vento';
 const env = vento({
   dataVarname: "it",
   autoDataVarname: true,
-  includes: templateRoot.pathname,
+  includes: templatePath,
   autoescape: false
 });
 env.filters.iconType = getIconType;
