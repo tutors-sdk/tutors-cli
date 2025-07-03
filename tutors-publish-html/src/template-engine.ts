@@ -31,6 +31,6 @@ function writeFile(
   }
 
 export async function publishTemplate(path: string, file: string, template: string, lo: any) {
-  const result = await env.run(`${template}.vto`, { lo: lo });
+  const result = await env.run(`${template.toLowerCase()}.vto`, { lo: lo });
   writeFile(path, file, result.content);
 }
