@@ -14,7 +14,6 @@ const filesToDownload = [
   'components/cards/UnitCard.vto',
   'components/cards/VideoCard.vto',
   'components/iconography/Icon.vto',
-  'components/iconography/styles.ts',
   'components/navigators/MainNavigator.vto',
   'components/navigators/support/Breadcrumbs.vto',
   'components/navigators/support/Companions.vto',

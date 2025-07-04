@@ -8,7 +8,7 @@ import process from "node:process";
 import { emitCourse } from "./src/course-emitter.ts";
 import { downloadAllFiles } from "./src/template-downloader.ts";
 
-const versionStr = `tutors-publish-html: 0.0.51`;
+const versionStr = `tutors-publish-html: 0.0.52`;
 
 if (!fs.existsSync("course.md")) {
   console.log("Cannot locate course.md. Change to course folder and try again. ");
