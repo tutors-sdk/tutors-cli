@@ -1,6 +1,6 @@
 {
   "name": "@tutors/tutors-publish-html",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "exports": "./main.ts",
   "license": "MIT",
   "tasks": {

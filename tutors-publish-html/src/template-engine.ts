@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { getIconColour, getIconType } from "./vento/components/iconography/styles.ts";
+import { getIconColour, getIconType } from "./styles.ts";
 import vento from "@vento/vento";
 
 // Get current module directory
@@ -13,7 +13,7 @@ console.log('Vento dir:', ventoDir);
 const env = vento({
   dataVarname: "it",
   autoDataVarname: true,
-  includes: ventoDir,
+  includes: `${Deno.cwd()}/html/vento`,
   autoescape: false
 });
 env.filters.iconType = getIconType;
@@ -31,6 +31,6 @@ function writeFile(
   }
 
 export async function publishTemplate(path: string, file: string, template: string, lo: any) {
-  const result = await env.run(`${template.toLowerCase()}.vto`, { lo: lo });
+  const result = await env.run(`${template}.vto`, { lo: lo });
   writeFile(path, file, result.content);
 }

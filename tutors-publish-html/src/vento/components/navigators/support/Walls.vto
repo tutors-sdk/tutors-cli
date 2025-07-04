@@ -1,4 +1,4 @@
-{{ import { icon } from "/components/iconography/icon.vto"}}
+{{ import { icon } from "/components/iconography/Icon.vto"}}
 
 {{ export function walls(lo) }}
   {{ set depth = lo.type === "course" ? 0 : lo.type === "topic" ? 1 : lo.parentLo?.type === "topic" ? 2 : 3 }}

@@ -8,7 +8,7 @@ import process from "node:process";
 import { emitCourse } from "./src/course-emitter.ts";
 import { downloadAllFiles } from "./src/template-downloader.ts";
 
-const versionStr = `tutors-publish-html: 0.0.50`;
+const versionStr = `tutors-publish-html: 0.0.51`;
 
 if (!fs.existsSync("course.md")) {
   console.log("Cannot locate course.md. Change to course folder and try again. ");
@@ -18,7 +18,7 @@ if (!fs.existsSync("course.md")) {
   const lo = parseCourse(srcFolder);
   generateCourse(lo, destFolder);
   decorateCourseTree(lo);
-  downloadAllFiles();
+  await downloadAllFiles();
   emitCourse(destFolder, lo);
 }
 console.log(versionStr);
