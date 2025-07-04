@@ -6,8 +6,9 @@ import { decorateCourseTree } from "@tutors/tutors-model-lib";
 import * as fs from "node:fs";
 import process from "node:process";
 import { emitCourse } from "./src/course-emitter.ts";
+import { downloadAllFiles } from "./src/template-downloader.ts";
 
-const versionStr = `tutors-publish-html: 4.0.40`;
+const versionStr = `tutors-publish-html: 0.0.50`;
 
 if (!fs.existsSync("course.md")) {
   console.log("Cannot locate course.md. Change to course folder and try again. ");
@@ -17,7 +18,7 @@ if (!fs.existsSync("course.md")) {
   const lo = parseCourse(srcFolder);
   generateCourse(lo, destFolder);
   decorateCourseTree(lo);
-  
+  downloadAllFiles();
   emitCourse(destFolder, lo);
 }
 console.log(versionStr);

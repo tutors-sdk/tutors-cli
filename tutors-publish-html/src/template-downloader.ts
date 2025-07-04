@@ -1,0 +1,61 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
+
+const destVentoDir = path.join(Deno.cwd(), 'html', 'vento');
+
+const filesToDownload = [
+  'components/cards/Card.vto',
+  'components/cards/CardDeck.vto',
+  'components/cards/CompositeCard.vto',
+  'components/cards/Image.vto',
+  'components/cards/NoteCard.vto',
+  'components/cards/PanelCards.vto',
+  'components/cards/TalkCard.vto',
+  'components/cards/UnitCard.vto',
+  'components/cards/VideoCard.vto',
+  'components/iconography/Icon.vto',
+  'components/iconography/styles.ts',
+  'components/navigators/MainNavigator.vto',
+  'components/navigators/support/Breadcrumbs.vto',
+  'components/navigators/support/Companions.vto',
+  'components/navigators/support/TitleCard.vto',
+  'components/navigators/support/Walls.vto',
+  'components/url.vto',
+  'Composite.vto',
+  'Course.vto',
+  'Lab.vto',
+  'Talk.vto',
+  'layouts/main.vto',
+  'Note.vto',
+  'Topic.vto',
+  'Wall.vto'
+];
+
+async function downloadFile(filePath: string) {
+  try {
+    const url = `https://raw.githubusercontent.com/tutors-sdk/tutors-cli/refs/heads/master/tutors-publish-html/src/vento/${filePath}`;
+    const targetPath = path.join(destVentoDir, filePath);
+    const targetDir = path.dirname(targetPath);
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const content = await response.text();
+    fs.writeFileSync(targetPath, content);
+  } 
+  catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error(`Error downloading ${filePath}: ${errorMessage}`);
+    throw error;
+  }
+}
+
+export async function downloadAllFiles() {
+  try {
+    await Promise.all(filesToDownload.map(downloadFile));
+  } catch (error) {
+    console.error('Error downloading files:', error);
+    throw error;
+  }
+}
