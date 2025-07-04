@@ -33,7 +33,8 @@
         "--allow-write",
         "--allow-sys",
         "--allow-env",
-        "--allow-run"
+        "--allow-run",
+        "--allow-net"
       ],
       "attachSimplePort": 9229
     },

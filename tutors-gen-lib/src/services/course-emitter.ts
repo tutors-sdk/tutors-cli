@@ -1,7 +1,7 @@
 import shelljs from "npm:shelljs@^0";
 import type { Course, Lab, Lo, Talk, Topic, Unit } from "@tutors/tutors-model-lib";
-import { fixWallRoutes } from "./utils.ts";
-import { publishTemplate } from "./template-engine.ts";
+import { fixWallRoutes } from "../templates/utils.ts";
+import { publishTemplate } from "../templates/template-engine.ts";
 
 function emitTalk(lo: Talk, path: string) {
   const talkPath = `${path}/${lo.id}`;

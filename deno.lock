@@ -31,9 +31,6 @@
     "npm:markdown-it-table-of-contents@0.9": "0.9.0",
     "npm:markdown-it@^14.1.0": "14.1.0",
     "npm:meriyah@6.0.5": "6.0.5",
-    "npm:nunjucks@*": "3.2.4",
-    "npm:nunjucks@3": "3.2.4",
-    "npm:nunjucks@3.2.4": "3.2.4",
     "npm:shelljs@*": "0.10.0",
     "npm:shelljs@0": "0.8.5",
     "npm:shelljs@~0.8.5": "0.8.5",
@@ -162,9 +159,6 @@
     "@types/unist@3.0.3": {
       "integrity": "sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q=="
     },
-    "a-sync-waterfall@1.0.1": {
-      "integrity": "sha512-RYTOHHdWipFUliRFMCS4X2Yn2X8M87V/OpSqWzKKOGhzqyUxzyVmhHDH9sAvG+ZuQf/TAOFsLCpMw09I1ufUnA=="
-    },
     "abort-controller@3.0.0": {
       "integrity": "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==",
       "dependencies": [
@@ -261,9 +255,6 @@
     "argparse@2.0.1": {
       "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
     },
-    "asap@2.0.6": {
-      "integrity": "sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA=="
-    },
     "async@3.2.6": {
       "integrity": "sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA=="
     },
@@ -340,9 +331,6 @@
     },
     "commander@2.20.3": {
       "integrity": "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="
-    },
-    "commander@5.1.0": {
-      "integrity": "sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg=="
     },
     "compress-commons@4.1.2": {
       "integrity": "sha512-D3uMHtGc/fcO1Gt1/L7i1e33VOvD4A9hfQLP+6ewd+BvG/gQ84Yh4oftEhAdjSMgBgwGL+jsppT7JYNpo6MHHg==",
@@ -625,7 +613,7 @@
     "katex@0.12.0": {
       "integrity": "sha512-y+8btoc/CK70XqcHqjxiGWBOeIL8upbS0peTPXTvgrh21n1RiWWcIpSWM+4uXq+IAgNh9YYQWdc7LVDPDAEEAg==",
       "dependencies": [
-        "commander@2.20.3"
+        "commander"
       ],
       "bin": true
     },
@@ -753,15 +741,6 @@
       "dependencies": [
         "path-key"
       ]
-    },
-    "nunjucks@3.2.4": {
-      "integrity": "sha512-26XRV6BhkgK0VOxfbU5cQI+ICFUtMLixv1noZn1tGU38kQH5A5nmmbk/O45xdyBhD1esk47nKrY0mvQpZIhRjQ==",
-      "dependencies": [
-        "a-sync-waterfall",
-        "asap",
-        "commander@5.1.0"
-      ],
-      "bin": true
     },
     "once@1.4.0": {
       "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
@@ -1089,9 +1068,11 @@
       "tutors-gen-lib": {
         "dependencies": [
           "jsr:@tutors/tutors-model-lib@0",
+          "jsr:@vento/vento@^1.14.0",
           "npm:archiver@^7.0.1",
           "npm:front-matter@^4.0.2",
-          "npm:js-yaml@^4.1.0"
+          "npm:js-yaml@^4.1.0",
+          "npm:shelljs@~0.8.5"
         ]
       },
       "tutors-model-lib": {
@@ -1123,7 +1104,6 @@
           "jsr:@tutors/tutors-gen-lib@0",
           "jsr:@tutors/tutors-model-lib@0",
           "jsr:@vento/vento@^1.14.0",
-          "npm:nunjucks@3.2.4",
           "npm:shelljs@~0.8.5"
         ]
       }

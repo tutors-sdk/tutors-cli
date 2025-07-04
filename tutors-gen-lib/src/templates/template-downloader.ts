@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-const destVentoDir = path.join(Deno.cwd(), 'html', 'vento');
+let destVentoDir = "";
 
 const filesToDownload = [
   'components/cards/Card.vto',
@@ -50,11 +50,12 @@ async function downloadFile(filePath: string) {
   }
 }
 
-export async function downloadAllFiles() {
+export async function downloadVentoTemplates(folder:string) {
   try {
+   destVentoDir = path.join(folder, 'vento');
     await Promise.all(filesToDownload.map(downloadFile));
   } catch (error) {
-    console.error('Error downloading files:', error);
+    console.error('Error downloading vento templates:', error);
     throw error;
   }
 }
