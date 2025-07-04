@@ -5,7 +5,7 @@ import { resourceBuilder } from "./services/resource-builder.ts";
 import { writeFile } from "./utils/file-utils.ts";
 import { generateNetlifyToml } from "./utils/netlify.ts";
 import { generateLlms } from "./utils/llms.ts";
-import { emitCourse } from "./services/course-emitter.ts";
+import { emitStaticCourse } from "./services/course-emitter.ts";
 import { downloadVentoTemplates } from "./templates/template-downloader.ts";
 
 export function parseCourse(folder: string): Course {
@@ -29,5 +29,5 @@ export async function generateStaticCourse(course: Course, folder: string) {
   resourceBuilder.copyAssets(folder);
   await downloadVentoTemplates(folder);
   decorateCourseTree(course);
-  emitCourse(folder, course);
+  emitStaticCourse(folder, course);
 }

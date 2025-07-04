@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 let destVentoDir = "";
+const srcVentoDir = "https://raw.githubusercontent.com/tutors-sdk/tutors-cli/refs/heads/master/tutors-gen-lib/src/templates/vento/";
 
 const filesToDownload = [
   'components/cards/Card.vto',
@@ -32,7 +33,7 @@ const filesToDownload = [
 
 async function downloadFile(filePath: string) {
   try {
-    const url = `https://raw.githubusercontent.com/tutors-sdk/tutors-cli/refs/heads/master/tutors-publish-html/src/vento/${filePath}`;
+    const url = `${srcVentoDir}${filePath}`;
     const targetPath = path.join(destVentoDir, filePath);
     const targetDir = path.dirname(targetPath);
     if (!fs.existsSync(targetDir)) {

@@ -73,7 +73,7 @@ export function emitWalls(path: string, lo: Course) {
   });
 }
 
-export function emitCourse(path: string, lo: Course) {
+export function emitStaticCourse(path: string, lo: Course) {
   shelljs.cd(path);
   lo?.los?.forEach((lo) => {
     emitComposite(lo as Topic, path);
