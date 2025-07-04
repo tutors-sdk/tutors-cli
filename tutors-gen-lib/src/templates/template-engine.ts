@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { getIconColour, getIconType } from "./styles.ts";
 import vento from "@vento/vento";
+import process from "node:process";
 
 // Get current module directory
 const moduleDir = path.dirname(new URL(import.meta.url).pathname);
@@ -13,7 +14,7 @@ console.log('Vento dir:', ventoDir);
 const env = vento({
   dataVarname: "it",
   autoDataVarname: true,
-  includes: `${Deno.cwd()}/html/vento`,
+  includes: `${process.cwd()}/html/vento`,
   autoescape: false
 });
 env.filters.iconType = getIconType;

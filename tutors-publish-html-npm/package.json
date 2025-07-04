@@ -1,11 +1,11 @@
 {
-  "name": "tutors-publish-npm",
+  "name": "tutors-publish-html-npm",
   "version": "4.0.20",
   "description": "A command line application for publishing to npm",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "tutors-publish-npm": "./dist/index.js"
+    "tutors-publish-html-npm": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -23,7 +23,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@tutors/tutors-gen-lib": "npm:@jsr/tutors__tutors-gen-lib@^0.0.19"
+    "@tutors/tutors-gen-lib": "npm:@jsr/tutors__tutors-gen-lib@^0.0.53"
   },
   "bundleDependencies": [
     "@tutors/tutors-gen-lib"

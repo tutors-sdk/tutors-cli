@@ -5,7 +5,7 @@ import {
 import * as fs from "node:fs";
 import process from "node:process";
 
-const versionStr = `tutors-publish: 0.0.53`;
+const versionStr = `tutors-publish: 0.0.54`;
 
 if (!fs.existsSync("course.md")) {
   console.log("Cannot locate course.md. Please change to course folder and try again.");
@@ -15,4 +15,4 @@ if (!fs.existsSync("course.md")) {
   const lo = parseCourse(srcFolder);
   generateDynamicCourse(lo, destFolder);
 }
-console.log(versionStr);
+console.log(versionStr);  
