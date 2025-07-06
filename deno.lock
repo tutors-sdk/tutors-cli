@@ -1067,7 +1067,7 @@
     "members": {
       "tutors-gen-lib": {
         "dependencies": [
-          "jsr:@tutors/tutors-model-lib@0",
+          "jsr:@tutors/tutors-model-lib@4",
           "jsr:@vento/vento@^1.14.0",
           "npm:archiver@^7.0.1",
           "npm:front-matter@^4.0.2",
@@ -1095,8 +1095,8 @@
       },
       "tutors-publish": {
         "dependencies": [
-          "jsr:@tutors/tutors-gen-lib@0",
-          "jsr:@tutors/tutors-model-lib@0"
+          "jsr:@tutors/tutors-gen-lib@4",
+          "jsr:@tutors/tutors-model-lib@4"
         ]
       },
       "tutors-publish-html": {
