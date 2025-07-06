@@ -108,7 +108,7 @@ export function createWalls(course: Course) {
 
 function createWallLink(type: string, course: Course): IconNav {
   return {
-    link: `/wall/${type}/${course.courseUrl}`,
+    link: `/wall/${type}/${course.courseId}`,
     type: type,
     tip: `All ${type}s in the course`,
     target: "",
