@@ -31,6 +31,16 @@ function buildTalk(lo: Lo, lr: LearningResource) {
   if (!talk.pdf) {
     talk.route = lo.video;
   }
+
+  // Merge frontmatter from talk.md if it exists (for Marp talks)
+  const talkMdFile = getFileWithName(lr, "talk.md");
+  if (talkMdFile) {
+    const talkContents = frontMatter(readWholeFile(talkMdFile));
+    const talkFrontMatter = talkContents.attributes || {};
+
+    // Merge talk.md frontmatter with existing frontmatter (existing takes precedence)
+    talk.frontMatter = { ...talkFrontMatter, ...(talk.frontMatter || {}) };
+  }
 }
 
 function buildArchive(lo: Lo, lr: LearningResource) {
